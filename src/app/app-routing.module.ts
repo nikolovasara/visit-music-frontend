@@ -1,7 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {HomePage} from "./pages/home/home.page";
+import {MusicEventPage} from "./pages/music-event/music-event.page";
+import {BuyTicketPage} from "./pages/buy-ticket/buy-ticket.page";
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    component: HomePage
+  },
+  //TODO duplicate route for filtering events by region
+  {
+    path: 'music-event/:id',
+    component: MusicEventPage
+  },
+  {
+    path: 'buy-ticket',
+    component: BuyTicketPage
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
