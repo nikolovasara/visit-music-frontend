@@ -3,3 +3,48 @@
   display: flex;
 
 }
+
+.logo-container{
+  position: relative;
+}
+
+.logo-container img:first-child{
+  width: 80%;
+  margin-bottom: 50px;
+}
+
+#logo-text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.card{
+  margin-bottom: 20px;
+  width: 80%;
+  height: 200px;
+  background-image: url('../../../assets/img/card-background.jpg');
+  background-size: cover;
+}
+
+.card-header{
+  background-color: #76323f;
+  color:white;
+  padding: 20px;
+}
+
+.card-body{
+  color: white;
+  width: 80%;
+  background-color: #76323f;
+  opacity: 80%;
+}
+
+.card>.row{
+  height:180px;
+}
+
+.card a{
+  height: 150px;
+}
