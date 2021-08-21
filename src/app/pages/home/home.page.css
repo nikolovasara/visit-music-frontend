@@ -22,7 +22,7 @@
 
 .card{
   margin-bottom: 20px;
-  width: 80%;
+  width: 1036px;
   height: 200px;
   background-image: url('../../../assets/img/card-background.jpg');
   background-size: cover;
@@ -36,7 +36,7 @@
 
 .card-body{
   color: white;
-  width: 80%;
+  width: 70%;
   background-color: #76323f;
   opacity: 80%;
 }
@@ -45,6 +45,50 @@
   height:180px;
 }
 
-.card a{
-  height: 150px;
+#eventDetailsBtn .btn{
+  height: 50px;
+  width: 150px;
+}
+
+#buyTicketsBtn .btn{
+  height: 100px;
+  width: 150px;
+  line-height: 40px;
+  font-size: 20px;
+}
+
+#eventTitle{
+  position: relative;
+  height: 120px;
+}
+
+#eventTitle div:nth-child(2){
+  position: absolute;
+  bottom: -30px;
+  right: 350px;
+  width: 200px;
+}
+div div.container{
+  position: relative;
+}
+#eventGenre{
+  position: absolute;
+  width: 100px;
+  height: 30px;
+  line-height: 20px;
+  left: 50px;
+  top: 20px;
+}
+
+div ul{
+  font-size: 12px;
+}
+ul.list-group:after {
+  clear: both;
+  display: block;
+  content: "";
+}
+
+li{
+  border: 0 !important;
 }

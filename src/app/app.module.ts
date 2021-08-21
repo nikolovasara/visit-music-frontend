@@ -10,13 +10,20 @@ import {MusicEventPage} from "./pages/music-event/music-event.page";
 import {BuyTicketPage} from "./pages/buy-ticket/buy-ticket.page";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {PaymentService} from "./services/payment.service";
+import {CustomDatePipe} from "./pipes/custom-date.pipe";
+import {ShoppingCartPage} from "./pages/shopping-cart/shopping-cart.page";
 
 const pages = [
   HomePage,
   HeaderPage,
   MusicEventPage,
-  BuyTicketPage
+  BuyTicketPage,
+  ShoppingCartPage
 ];
+
+const pipes = [
+  CustomDatePipe
+]
 
 const components = [
   AppComponent
@@ -35,8 +42,8 @@ const providers = [
 ];
 
 @NgModule({
-  declarations: [...pages, ...components],
-  imports: [...modules],
+  declarations: [...pages, ...components, ...pipes],
+    imports: [...modules, FormsModule],
   providers: [...providers],
   bootstrap: [...components]
 })

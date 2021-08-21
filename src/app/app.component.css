@@ -1,0 +1,8 @@
+div{
+  background-image: url("../assets/img/siteBg.png");
+  background-repeat: repeat;
+  background-size: 300px;
+  background-attachment: scroll;
+
+}
+

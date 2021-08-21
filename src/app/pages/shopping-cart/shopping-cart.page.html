@@ -1,0 +1,46 @@
+<div class="card cart-items mx-auto">
+  <div class="row">
+    <div class="col-md-8 cart">
+      <div class="title">
+        <div class="row">
+          <div class="col">
+            <h4><b>Shopping Cart</b></h4>
+          </div>
+        </div>
+      </div>
+      <div class="row border-top border-bottom">
+        <div class="row main align-items-center">
+          <div class="col-4">
+            {{musicEvent.musicEventName}}
+          </div>
+          <div class="col">
+            {{musicEvent.eventTime | customDate}} <br/>
+            {{musicEvent.eventTime | date: 'shortTime'}}
+          </div>
+          <div class="col-3">
+            <input [(ngModel)]="totalTickets" type="number"  min="0" value="1">
+          </div>
+          <div class="col text-center">&euro; {{musicEvent.ticketPrice.amount}} </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 summary">
+      <div>
+        <h5><b>Summary</b></h5>
+      </div>
+      <hr>
+      <div class="row text-center h-25">
+        <div class="col totalNumber" style="padding-left:0;">Number of events:
+          <span class="badge bg-body">1</span>
+        </div>
+        <div class="col totalNumber" style="padding-left:0;">Number of tickets:
+          <span class="badge bg-body">{{totalTickets}}</span>
+        </div>
+      </div>
+      <div class="row mt-5 fw-bold" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+        <div class="col">Total price:</div>
+        <div class="col text-right">&euro; 137.00</div>
+      </div> <button class="btn">CHECKOUT</button>
+    </div>
+  </div>
+</div>
