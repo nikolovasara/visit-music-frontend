@@ -12,15 +12,22 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Macedonia</a>
+          <a class="nav-link" href="/macedonia">Macedonia</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">World</a>
+          <a class="nav-link" href="/world">World</a>
         </li>
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-light" type="submit">Search</button>
+        <span class="cart-holder">
+          <a href="/shopping-cart">
+            <i data-count="1" class="fas fa-shopping-cart text-white fa-2x"></i>
+          </a>
+          <span class='badge badge-warning' id='lblCartCount'> {{itemsInCart}} </span>
+        </span>
+
       </form>
     </div>
   </div>

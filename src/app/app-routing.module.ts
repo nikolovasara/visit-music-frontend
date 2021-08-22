@@ -10,13 +10,21 @@ const routes: Routes = [
     path: '',
     component: HomePage
   },
+  {
+    path:'macedonia',
+    component: HomePage
+  },
+  {
+    path:'world',
+    component:HomePage
+  },
   //TODO duplicate route for filtering events by region
   {
     path: 'music-event/:id',
     component: MusicEventPage
   },
   {
-    path: 'buy-ticket',
+    path: 'shopping-cart',
     component: ShoppingCartPage
   },
 ];

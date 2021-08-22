@@ -8,6 +8,8 @@
           </div>
         </div>
       </div>
+      <div *ngIf="musicEvents==null||musicEvents.length==0">There are no items in the cart.</div>
+      <div *ngFor="let musicEvent of musicEvents">
       <div class="row border-top border-bottom">
         <div class="row main align-items-center">
           <div class="col-4">
@@ -17,11 +19,17 @@
             {{musicEvent.eventTime | customDate}} <br/>
             {{musicEvent.eventTime | date: 'shortTime'}}
           </div>
-          <div class="col-3">
-            <input [(ngModel)]="totalTickets" (focus)="getPrevSalesValue()" (change)="updateSales($event)" type="number"  min="0" value="1">
+          <div class="col-2">
+            <input class="text-center" (change)="updateSales($event, musicEvent.id.id)" type="number"  min="0" [value]="getNumberOfTicketsForEvent(musicEvent.id.id)">
           </div>
-          <div class="col text-center">&euro; {{musicEvent.ticketPrice.amount}} </div>
+          <div class="col text-center"><span *ngIf="musicEvent.ticketPrice.currency==='EUR'">&euro;</span>
+            {{musicEvent.ticketPrice.amount}} <span *ngIf="musicEvent.ticketPrice.currency==='MKD'">Ден.</span>
+          </div>
+          <div class="col-1 text-center">
+            <button class="btn btn-outline-danger" (click)="removeMusicEvent(musicEvent.id.id)"><i class="fas fa-times"></i></button>
+          </div>
         </div>
+      </div>
       </div>
     </div>
     <div class="col-md-4 summary">
@@ -31,7 +39,7 @@
       <hr>
       <div class="row text-center h-25">
         <div class="col totalNumber" style="padding-left:0;">Number of events:
-          <span class="badge bg-body">1</span>
+          <span class="badge bg-body">{{musicEvents.length}}</span>
         </div>
         <div class="col totalNumber" style="padding-left:0;">Number of tickets:
           <span class="badge bg-body">{{totalTickets}}</span>
@@ -39,7 +47,13 @@
       </div>
       <div class="row mt-5 fw-bold" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
         <div class="col">Total price:</div>
-        <div class="col text-right">&euro; 137.00</div>
+        <div class="col text-right">
+          <input type="text" [value]="total" disabled>
+          <select (change)="convertValue($event)">
+            <option value="EUR">EUR (&euro; )</option>
+            <option value="MKD">MKD (Ден.)</option>
+          </select>
+        </div>
       </div> <button class="btn">CHECKOUT</button>
     </div>
   </div>

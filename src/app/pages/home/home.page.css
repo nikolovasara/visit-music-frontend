@@ -99,5 +99,12 @@ ul.list-group:after {
 }
 
 li{
-  border: 0 !important;
+  border: 1px solid black;
+  display: inline-block;
+  margin-right: 2px;
 }
+
+.fill-gap{
+  height: 250px;
+}
+

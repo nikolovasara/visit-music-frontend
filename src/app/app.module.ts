@@ -13,6 +13,8 @@ import {PaymentService} from "./services/payment.service";
 import {CustomDatePipe} from "./pipes/custom-date.pipe";
 import {ShoppingCartPage} from "./pages/shopping-cart/shopping-cart.page";
 import {OrderManagementService} from "./services/order-management.service";
+import {CurrencyConverterPipe} from "./pipes/currency-converter.pipe";
+import {JwPaginationModule} from "jw-angular-pagination";
 
 const pages = [
   HomePage,
@@ -23,7 +25,8 @@ const pages = [
 ];
 
 const pipes = [
-  CustomDatePipe
+  CustomDatePipe,
+  CurrencyConverterPipe
 ]
 
 const components = [
@@ -34,7 +37,9 @@ const modules = [
   BrowserModule,
   AppRoutingModule,
   HttpClientModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  FormsModule,
+  JwPaginationModule
 ];
 
 const providers = [
@@ -45,8 +50,8 @@ const providers = [
 
 @NgModule({
   declarations: [...pages, ...components, ...pipes],
-    imports: [...modules, FormsModule],
-  providers: [...providers],
+    imports: [...modules],
+  providers: [...providers, CurrencyConverterPipe],
   bootstrap: [...components]
 })
 export class AppModule {
