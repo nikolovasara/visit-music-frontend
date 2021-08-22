@@ -12,6 +12,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {PaymentService} from "./services/payment.service";
 import {CustomDatePipe} from "./pipes/custom-date.pipe";
 import {ShoppingCartPage} from "./pages/shopping-cart/shopping-cart.page";
+import {OrderManagementService} from "./services/order-management.service";
 
 const pages = [
   HomePage,
@@ -38,6 +39,7 @@ const modules = [
 
 const providers = [
   MusicEventService,
+  OrderManagementService,
   PaymentService
 ];
 

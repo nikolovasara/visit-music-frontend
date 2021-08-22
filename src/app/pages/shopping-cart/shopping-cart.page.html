@@ -18,7 +18,7 @@
             {{musicEvent.eventTime | date: 'shortTime'}}
           </div>
           <div class="col-3">
-            <input [(ngModel)]="totalTickets" type="number"  min="0" value="1">
+            <input [(ngModel)]="totalTickets" (focus)="getPrevSalesValue()" (change)="updateSales($event)" type="number"  min="0" value="1">
           </div>
           <div class="col text-center">&euro; {{musicEvent.ticketPrice.amount}} </div>
         </div>
@@ -44,3 +44,4 @@
     </div>
   </div>
 </div>
+<div class="fill-gap"></div>
