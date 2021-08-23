@@ -28,12 +28,12 @@ export class ShoppingCartPage implements OnInit{
   ngOnInit(){
     this.orderManagementService.onEventAdded().subscribe(
       _=>{ });
-    this.getFromLocalStorage();
+    this.getFromSessionStorage();
     this.updateTotalNumberOfTickets();
     this.setTotal();
   }
 
-  getFromLocalStorage(){
+  getFromSessionStorage(){
     this.musicEvents=this.orderManagementService.getEventsFromShoppingCart();
     this.musicEvents.forEach(e=>{this.ticketsByEvent.set(e.id.id,1)});
   }
@@ -101,7 +101,7 @@ export class ShoppingCartPage implements OnInit{
     console.log(id);
     this.orderManagementService.removeFromShoppingCart(id);
     this.ticketsByEvent.delete(id);
-    this.getFromLocalStorage();
+    this.getFromSessionStorage();
     this.setTotal();
     this.updateTotalNumberOfTickets();
   }

@@ -27,7 +27,7 @@ export class OrderManagementService {
     this.shoppingCartEvents.push(musicEvent);
     this.eventsBehaviorSubject.next(this.shoppingCartEvents);
 
-    this.updateLocalStorage();
+    this.updateSessionStorage();
     this.updateCartHeaderIcon(this.shoppingCartEvents.length);
   }
 
@@ -37,21 +37,21 @@ export class OrderManagementService {
     let index=this.shoppingCartEvents.findIndex(e=>e.id.id===id)
     console.log("index: ",index);
     this.shoppingCartEvents.splice(index,1);
-    this.updateLocalStorage();
+    this.updateSessionStorage();
     this.updateCartHeaderIcon(this.shoppingCartEvents.length);
 
   }
 
   getEventsFromShoppingCart(){
-    return JSON.parse(localStorage.getItem('eventsInCart'));
+    return JSON.parse(sessionStorage.getItem('eventsInCart'));
   }
 
   onEventAdded(){
     return this.eventsBehaviorSubject.asObservable();
   }
 
-  updateLocalStorage(){
-    localStorage.setItem('eventsInCart',JSON.stringify(this.shoppingCartEvents));
+  updateSessionStorage(){
+    sessionStorage.setItem('eventsInCart',JSON.stringify(this.shoppingCartEvents));
   }
 
   updateCartHeaderIcon(n){

@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {ChangeDetectorRef, Component, OnInit} from "@angular/core";
 import {MusicEventService} from "../../services/music-event.service";
 import {MusicEvent} from "../../interfaces/music-event.interface";
 import {tap} from "rxjs/operators";
@@ -15,7 +15,9 @@ export class HomePage implements OnInit{
   pageOfItems: Array<any>;
   clicked:Map<string,boolean>=new Map<string, boolean>();
 
-  constructor(private router:Router, private musicEventService: MusicEventService, private orderManagementService : OrderManagementService) {
+  constructor(private router:Router,
+              private musicEventService: MusicEventService,
+              private orderManagementService : OrderManagementService) {
 
   }
 
@@ -65,7 +67,8 @@ export class HomePage implements OnInit{
 
   addToCart(musicEvent){
     this.orderManagementService.addToShoppingCart(musicEvent);
-    this.clicked[musicEvent.id.id]=true;
+    this.disableAddButtonsForEventsInCart();
+    console.log(this.clicked)
   }
 
   onChangePage(pageOfMusicEvents: Array<any>) {
