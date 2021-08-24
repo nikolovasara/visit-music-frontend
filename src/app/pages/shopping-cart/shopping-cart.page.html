@@ -20,7 +20,7 @@
             {{musicEvent.eventTime | date: 'shortTime'}}
           </div>
           <div class="col-2">
-            <input class="text-center" (change)="updateSales($event, musicEvent.id.id)" type="number"  min="0" [value]="getNumberOfTicketsForEvent(musicEvent.id.id)">
+            <input class="text-center" (change)="updateSales($event, musicEvent.id.id)" type="number" max="10" min="0" [value]="getNumberOfTicketsForEvent(musicEvent.id.id)">
           </div>
           <div class="col text-center"><span *ngIf="musicEvent.ticketPrice.currency==='EUR'">&euro;</span>
             {{musicEvent.ticketPrice.amount}} <span *ngIf="musicEvent.ticketPrice.currency==='MKD'">Ден.</span>

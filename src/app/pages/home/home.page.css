@@ -69,6 +69,8 @@
 #eventTitle{
   position: relative;
   height: 120px;
+  border-left: 1px solid white;
+  padding-left: 30px;
 }
 
 #eventTitle div:nth-child(2){
@@ -79,6 +81,8 @@
 }
 div div.container{
   position: relative;
+  height: 200px;
+  margin-bottom: 50px;
 }
 #eventGenre{
   position: absolute;
@@ -106,5 +110,33 @@ li{
 
 .fill-gap{
   height: 250px;
+}
+
+.sold-out{
+  position:absolute;
+  top:-220px;
+  left:0px;
+  z-index: 10;
+  width: 1040px;
+  height: 200px;
+  background-color: black;
+  opacity: 50%;
+}
+
+#soldOutImg{
+  width: 200px;
+  position: absolute;
+  left:970px;
+  bottom:65px;
+  top:-410px;
+  z-index: 11;
+}
+
+#ticketPrice{
+  color: #73b673;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: end;
+  padding-right: 50px;
 }
 

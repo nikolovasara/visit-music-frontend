@@ -29,6 +29,11 @@
             <div class="col-8" id="eventTitle">
               <div class="row">
                 <h3>{{event.musicEventName}}</h3>
+               <!-- <span id="ticketPrice">
+                  <span *ngIf="event.ticketPrice.currency==='EUR'">&euro;</span>
+                  {{event.ticketPrice.amount}}
+                  <span *ngIf="event.ticketPrice.currency==='MKD'">Ден.</span>
+                </span>-->
               </div>
               <div class="row">
                 <ul class="list-group list-group-horizontal-sm" >
@@ -58,7 +63,14 @@
 
       </div>
     </div>
+    <div *ngIf="event.sales>event.venue.maxAllowedNumberOfVisitors * 0.3">
+    <div class="container sold-out"></div>
+    <div class="container">
+      <img id="soldOutImg" src="assets/img/soldout.png"/>
+    </div>
+    </div>
   </div>
+
 
 
 </div>

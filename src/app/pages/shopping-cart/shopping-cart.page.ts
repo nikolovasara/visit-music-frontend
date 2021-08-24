@@ -30,7 +30,17 @@ export class ShoppingCartPage implements OnInit{
       _=>{ });
     this.getFromSessionStorage();
     this.updateTotalNumberOfTickets();
+    this.allInEuros();
     this.setTotal();
+  }
+
+  allInEuros(){
+    this.musicEvents.forEach(e=>{
+      if(e.ticketPrice.currency=="MKD"){
+        e.ticketPrice.amount=this.currencyConverter.transform(e.ticketPrice.amount,"EUR");
+        e.ticketPrice.currency="EUR";
+      }
+    })
   }
 
   getFromSessionStorage(){
@@ -81,7 +91,7 @@ export class ShoppingCartPage implements OnInit{
       total+=e.ticketPrice.amount*this.getNumberOfTicketsForEvent(e.id.id)
     })
 
-    this.total=total;
+    this.total=Number(total.toFixed(2));
     return this.total;
   }
 
@@ -106,12 +116,12 @@ export class ShoppingCartPage implements OnInit{
     this.updateTotalNumberOfTickets();
   }
 
-  convertValue($event){
+  convertValue($event=null){
     console.log($event.target.value);
     this.total=this.currencyConverter.transform(this.total, $event.target.value);
     this.musicEvents.forEach(e=>{
       e.ticketPrice.amount=this.currencyConverter.transform(e.ticketPrice.amount,$event.target.value);
       e.ticketPrice.currency=$event.target.value;
-    })
+    });
   }
 }
