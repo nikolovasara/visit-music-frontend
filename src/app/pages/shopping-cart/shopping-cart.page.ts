@@ -15,7 +15,8 @@ export class ShoppingCartPage implements OnInit{
   musicEvents : MusicEvent[];
   ticketsByEvent =new Map<string, number>();
   total:number;
-  @Input() totalTickets: number;
+  isOrderCreated: boolean = false;
+  @Input() totalTickets: number = 0;
 
   constructor(private router: Router,
               private activatedRoute:ActivatedRoute,
@@ -123,5 +124,11 @@ export class ShoppingCartPage implements OnInit{
       e.ticketPrice.amount=this.currencyConverter.transform(e.ticketPrice.amount,$event.target.value);
       e.ticketPrice.currency=$event.target.value;
     });
+  }
+
+  orderCreated(){
+    this.isOrderCreated=true;
+    this.orderManagementService.clearSessionStorage();
+    console.log("ORDER CREATED");
   }
 }

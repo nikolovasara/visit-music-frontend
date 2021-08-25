@@ -58,5 +58,7 @@ export class OrderManagementService {
     this.cartHeaderIconChange.next(n);
   }
 
-
+  clearSessionStorage(){
+    sessionStorage.clear();
+  }
 }

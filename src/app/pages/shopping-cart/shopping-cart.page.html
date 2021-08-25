@@ -1,3 +1,7 @@
+<div *ngIf="isOrderCreated" class="container my-2 alert alert-success alert-dismissible">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Success!</strong> This alert box could indicate a successful or positive action.
+</div>
 <div class="card cart-items mx-auto">
   <div class="row">
     <div class="col-md-8 cart">
@@ -54,7 +58,7 @@
             <option value="MKD">MKD (Ден.)</option>
           </select>
         </div>
-      </div> <button class="btn">CHECKOUT</button>
+      </div> <button class="btn" (click)="orderCreated()">CHECKOUT</button>
     </div>
   </div>
 </div>
