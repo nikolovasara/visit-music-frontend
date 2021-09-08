@@ -1,22 +1,26 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from "@angular/core";
 import {MusicEvent} from "../../interfaces/music-event.interface";
 import {ActivatedRoute, Router} from "@angular/router";
 import {OrderManagementService} from "../../services/order-management.service";
 import {tap} from "rxjs/operators";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {CurrencyConverterPipe} from "../../pipes/currency-converter.pipe";
+import {BuyTicketPage} from "../buy-ticket/buy-ticket.page";
 
 @Component({
   templateUrl:'shopping-cart.page.html',
   styleUrls: ['shopping-cart.page.css']
 })
-export class ShoppingCartPage implements OnInit{
+export class ShoppingCartPage implements OnInit, AfterViewInit{
   selectedMusicEvent: MusicEvent | any;
   musicEvents : MusicEvent[];
   ticketsByEvent =new Map<string, number>();
   total:number;
-  isOrderCreated: boolean = false;
+
   @Input() totalTickets: number = 0;
+
+  paymentComponentReady : Subject<boolean> = new BehaviorSubject(false);
+  @ViewChild(BuyTicketPage) buyTicket: BuyTicketPage;
 
   constructor(private router: Router,
               private activatedRoute:ActivatedRoute,
@@ -35,6 +39,10 @@ export class ShoppingCartPage implements OnInit{
     this.setTotal();
   }
 
+  ngAfterViewInit(){
+    this.paymentComponentReady.next(true);
+  }
+
   allInEuros(){
     this.musicEvents.forEach(e=>{
       if(e.ticketPrice.currency=="MKD"){
@@ -46,6 +54,9 @@ export class ShoppingCartPage implements OnInit{
 
   getFromSessionStorage(){
     this.musicEvents=this.orderManagementService.getEventsFromShoppingCart();
+    if(this.musicEvents==null){
+      this.musicEvents=[];
+    }
     this.musicEvents.forEach(e=>{this.ticketsByEvent.set(e.id.id,1)});
   }
 
@@ -126,9 +137,19 @@ export class ShoppingCartPage implements OnInit{
     });
   }
 
-  orderCreated(){
-    this.isOrderCreated=true;
-    this.orderManagementService.clearSessionStorage();
+  orderCreated(amount){
+    this.pay(amount);
     console.log("ORDER CREATED");
+  }
+
+  pay(amount){
+    this.buyTicket.checkout(amount, this.totalTickets, this.musicEvents.length)
+      .subscribe(result=>{
+        if(result){
+          this.orderManagementService.clearSessionStorage();
+          this.totalTickets=0;
+          this.getFromSessionStorage();
+        }
+      });
   }
 }

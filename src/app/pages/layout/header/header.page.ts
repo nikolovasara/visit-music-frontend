@@ -13,7 +13,9 @@ export class HeaderPage implements OnInit{
   }
 
   ngOnInit() {
-    this.itemsInCart=this.orderManagementService.getEventsFromShoppingCart().length;
+    if(this.orderManagementService.getEventsFromShoppingCart()!=null){
+      this.itemsInCart=this.orderManagementService.getEventsFromShoppingCart().length;
+    }
     this.orderManagementService.cartHeaderIconChange.subscribe(value=>this.itemsInCart=value);
   }
 

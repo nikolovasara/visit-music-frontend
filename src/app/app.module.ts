@@ -15,13 +15,15 @@ import {ShoppingCartPage} from "./pages/shopping-cart/shopping-cart.page";
 import {OrderManagementService} from "./services/order-management.service";
 import {CurrencyConverterPipe} from "./pipes/currency-converter.pipe";
 import {JwPaginationModule} from "jw-angular-pagination";
+import {CheckoutPage} from "./pages/checkout/checkout.page";
 
 const pages = [
   HomePage,
   HeaderPage,
   MusicEventPage,
   BuyTicketPage,
-  ShoppingCartPage
+  ShoppingCartPage,
+  CheckoutPage
 ];
 
 const pipes = [

@@ -3,7 +3,8 @@
     <a class="navbar-brand" href="#">
       <img src="assets/img/navbar-logo.png" height="36" style="filter: invert(1)"/>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -21,14 +22,14 @@
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-light" type="submit">Search</button>
-        <span class="cart-holder">
-          <a href="/shopping-cart">
-            <i data-count="1" class="fas fa-shopping-cart text-white fa-2x"></i>
-          </a>
-          <span class='badge badge-warning' id='lblCartCount'> {{itemsInCart}} </span>
-        </span>
-
       </form>
+      <button class="d-inline-block ms-3 btn text-success fw-bold login-btn">Login</button>
     </div>
+    <span class="cart-holder">
+      <a href="/shopping-cart">
+        <i data-count="1" class="fas fa-shopping-cart text-white fa-2x"></i>
+      </a>
+      <span class='badge badge-warning' id='lblCartCount' [ngStyle]="{'background-color': itemsInCart == 0 ? 'black' : '#28b443'}" > {{itemsInCart}} </span>
+    </span>
   </div>
 </nav>

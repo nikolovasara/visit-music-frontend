@@ -6,19 +6,20 @@
 
 .logo-container{
   position: relative;
-  background-color: white;
+  border-top: 1px solid white;
+  background: rgb(2,0,36);
+  background: linear-gradient(281deg, rgba(2,0,36,1) 0%, rgba(105,9,121,1) 46%, rgba(131,8,56,1) 73%, rgba(102,32,32,1) 100%);
   height: 210px;
 }
 
-.logo-container img:first-child{
-  width: 100%;
-  height:210px;
-  opacity: 50%;
-}
+/*.logo-container img:first-child{*/
+/*  height:210px;*/
+/*  opacity: 50%;*/
+/*}*/
 
 .divider{
   height: 20px;
-  background-color: black;
+  background-color: purple;
   margin-bottom: 50px;
 }
 

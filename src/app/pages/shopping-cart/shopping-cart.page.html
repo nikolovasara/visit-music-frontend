@@ -1,4 +1,4 @@
-<div *ngIf="isOrderCreated" class="container my-2 alert alert-success alert-dismissible">
+<div *ngIf="paymentComponentReady.closed==true && buyTicket.isOrderCreated" class="container my-2 alert alert-success alert-dismissible">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   <strong>Success!</strong> This alert box could indicate a successful or positive action.
 </div>
@@ -58,8 +58,9 @@
             <option value="MKD">MKD (Ден.)</option>
           </select>
         </div>
-      </div> <button class="btn" (click)="orderCreated()">CHECKOUT</button>
+      </div> <button class="btn" *ngIf="paymentComponentReady" (click)="orderCreated(total)">CHECKOUT</button>
     </div>
   </div>
 </div>
 <div class="fill-gap"></div>
+<payment></payment>

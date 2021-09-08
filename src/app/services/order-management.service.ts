@@ -60,5 +60,6 @@ export class OrderManagementService {
 
   clearSessionStorage(){
     sessionStorage.clear();
+    this.updateCartHeaderIcon(0);
   }
 }

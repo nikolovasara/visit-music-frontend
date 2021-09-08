@@ -8,7 +8,7 @@
 
 #lblCartCount {
   font-size: 15px;
-  background: #ff0000;
+  background: #28b443;
   color: #fff;
   padding: 2px 5px;
   vertical-align: top;
@@ -26,4 +26,14 @@
 .label-warning[href],
 .badge-warning[href] {
   background-color: #c67605;
+}
+
+.navbar{
+  background: rgb(2,0,36);
+  background: linear-gradient(281deg, rgba(2,0,36,1) 0%, rgba(105,9,121,1) 46%, rgba(131,8,56,1) 73%, rgba(102,32,32,1) 100%);
+}
+
+.login-btn{
+  width: 80px;
+  border-bottom: 1px solid white;
 }

@@ -56,7 +56,7 @@ export class HomePage implements OnInit{
     this.musicEvents.forEach((m)=>{
       this.clicked.set(m.id.id,false);
     })
-    let eventsInCart=this.orderManagementService.getEventsFromShoppingCart()
+    let eventsInCart=this.orderManagementService.getEventsFromShoppingCart() == null ? [] : this.orderManagementService.getEventsFromShoppingCart()
     console.log(eventsInCart)
     eventsInCart.forEach((m)=>{
       this.clicked.delete(m.id.id);

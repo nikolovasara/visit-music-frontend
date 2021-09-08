@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'shopping-cart',
     component: ShoppingCartPage
   },
+  {
+    path: 'buy',
+    component: BuyTicketPage
+  },
 ];
 
 @NgModule({
