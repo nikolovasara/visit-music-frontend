@@ -1,0 +1,149 @@
+.details-card{
+  height: 600px;
+  margin-top:20px;
+  background-color: white;
+  width: 1036px;
+  padding: 10px;
+  margin-bottom: 50px;
+  border:2px solid darkslategrey;
+}
+
+.wrapper{
+  padding: 20%;
+  display: flex;
+
+}
+
+.divider{
+  height: 20px;
+  background-color: black;
+  margin-bottom: 50px;
+}
+
+#logo-text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.card,.details-card{
+  border-radius: 6px;
+}
+
+.card{
+
+  margin: 0 0 20px 0;
+  width: 1036px;
+  height: 150px;
+  border:2px solid darkslategrey;
+
+}
+
+.card-header{
+  padding: 20px;
+}
+
+.card>.row{
+  height:150px;
+}
+
+.card-body{
+  height: 100px;
+}
+
+.card-body .row{
+  height: 100px;
+}
+
+#eventTitle{
+  position: relative;
+  border-left: 1px solid white;
+  padding-left: 30px;
+}
+
+#eventTitle div:nth-child(2){
+  position: absolute;
+  bottom: 50px;
+  right: 350px;
+  width: 200px;
+}
+div div.container{
+  position: relative;
+  height: 600px;
+  margin-bottom: 50px;
+}
+
+#ticketPrice{
+  color: #0e9e65;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 120px;
+  height: 146px;
+  width: 200px;
+  padding: 0 30px;
+  background-color: white;
+  border:10px solid #269c76;
+  position: absolute;
+  top:-1px;
+  right:0;
+  border-radius: 1px;
+}
+
+.venue img, .musicPerformers img{
+  width: 250px;
+}
+
+.description img{
+  width: 200px;
+}
+
+.details-card .row:nth-child(2), .details-card .row:nth-child(3){
+  border-top: 1px solid #5dbd69;
+}
+
+.details-card .row{
+  margin: 10px;
+  padding-top:10px;
+}
+
+.musicPerformers{
+  font-size: 25px;
+  color: #0d374e;
+  font-family: 'Droid serif', serif;
+}
+
+.row b{
+  color: #0d374e;
+  font-family: 'Righteous', cursive;
+  text-decoration: underline;
+}
+
+span span {
+  display: inline-block;
+  width: 200px;
+}
+li span{
+  padding-left: 20px;
+  display: inline;
+}
+
+.venue span{
+  display: block;
+  margin-top: 20px;
+  color: #0d4e3c;
+  font-size: 20px;
+}
+
+.fill-gap{
+  height: 150px;
+}
+
+.eventDetails{
+  background-image: url("../../../assets/img/siteBgGreen.png");
+  background-repeat: repeat;
+  background-size: 300px;
+  background-attachment: scroll;
+  padding-top:50px;
+}

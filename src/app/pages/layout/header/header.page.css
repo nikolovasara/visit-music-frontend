@@ -1,0 +1,39 @@
+.cart-holder{
+  width: 100px;
+  height: 38px;
+  text-align: center;
+  padding-top: 5px;
+  position: relative;
+}
+
+#lblCartCount {
+  font-size: 15px;
+  background: #28b443;
+  color: #fff;
+  padding: 2px 5px;
+  vertical-align: top;
+  margin-left: -5px;
+  margin-top:-5px;
+}
+.badge {
+  padding-left: 15px;
+  padding-right: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+  background-color: #c67605;
+}
+
+.navbar{
+  background: rgb(2,0,36);
+  background: linear-gradient(281deg, rgba(2,0,36,1) 0%, rgba(105,9,121,1) 46%, rgba(131,8,56,1) 73%, rgba(102,32,32,1) 100%);
+}
+
+.login-btn{
+  width: 80px;
+  border-bottom: 1px solid white;
+}
