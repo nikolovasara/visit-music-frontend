@@ -3,7 +3,7 @@
   <img src="assets/img/logo1text.png" id="logo-text">
 </div>
 <div class="divider"></div>
-<div *ngFor="let event of musicEvents; index as i">
+<div *ngFor="let event of pageOfItems; index as i">
   <div class="container">
     <div class="text-center badge bg-body" id="eventGenre">{{event.musicPerformerList[0].genre}}</div>
     <div class="card mx-auto p-4">
@@ -76,5 +76,5 @@
 </div>
 
 <div class="card-footer justify-content-center pb-0 pt-3 w-100">
-  <jw-pagination [items]="musicEvents" (changePage)="onChangePage($event)"></jw-pagination>
+  <jw-pagination [pageSize]="5" [items]="musicEvents" (changePage)="onChangePage($event)"></jw-pagination>
 </div>

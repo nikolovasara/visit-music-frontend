@@ -4,6 +4,7 @@ import {HomePage} from "./pages/home/home.page";
 import {MusicEventPage} from "./pages/music-event/music-event.page";
 import {BuyTicketPage} from "./pages/buy-ticket/buy-ticket.page";
 import {ShoppingCartPage} from "./pages/shopping-cart/shopping-cart.page";
+import {LoginPage} from "./pages/login/login.page";
 
 const routes: Routes = [
   {
@@ -18,7 +19,6 @@ const routes: Routes = [
     path:'world',
     component:HomePage
   },
-  //TODO duplicate route for filtering events by region
   {
     path: 'music-event/:id',
     component: MusicEventPage
@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'buy',
     component: BuyTicketPage
   },
+  {
+    path: 'login',
+    component: LoginPage
+  }
 ];
 
 @NgModule({

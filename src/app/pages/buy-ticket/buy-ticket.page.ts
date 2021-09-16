@@ -1,8 +1,6 @@
 import {Component, OnInit} from "@angular/core";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import { loadStripe } from '@stripe/stripe-js';
+import {Subject} from "rxjs";
 import {PaymentService} from "../../services/payment.service";
-import {Observable, Subject} from "rxjs";
 
 @Component({
   selector: 'payment',
@@ -14,13 +12,15 @@ export class BuyTicketPage implements OnInit{
 
   public isOrderCreated: boolean = false;
 
-  constructor() { }
+  constructor(private _service: PaymentService) { }
 
   ngOnInit() {
+
     this.stripePaymentGateway();
   }
 
-  checkout(amount, totalTickets, totalEvents) {
+  checkout(amount, totalTickets, totalEvents, quantity) {
+    const serv = this._service;
     const result = new Subject<boolean>();
     const strikeCheckout = (<any>window).StripeCheckout.configure({
       key: 'pk_test_51JIHFwDDBoQMYZf5joYnEYlKyRaCJhQNMD2IZqTPatZphEZZEimPRlcJC44UQfTZZZlQQNoHZ7PWLaYAW11o3Cvo00aUEUe0jA',
@@ -28,6 +28,7 @@ export class BuyTicketPage implements OnInit{
       token: function (stripeToken: any) {
         console.log(stripeToken)
         alert('Stripe token generated!');
+        serv.pay(amount, stripeToken.id, 'USD', quantity).subscribe();
         result.next(true);
       }
     });
@@ -52,7 +53,7 @@ export class BuyTicketPage implements OnInit{
 
       scr.onload = () => {
         this.strikeCheckout = (<any>window).StripeCheckout.configure({
-          key: 'pk_test_12239293949ksdfksdjkfj1232q3jkjssdfjk',
+          key: 'pk_test_51JIHFwDDBoQMYZf5joYnEYlKyRaCJhQNMD2IZqTPatZphEZZEimPRlcJC44UQfTZZZlQQNoHZ7PWLaYAW11o3Cvo00aUEUe0jA',
           locale: 'auto',
           token: function (token: any) {
             console.log(token)

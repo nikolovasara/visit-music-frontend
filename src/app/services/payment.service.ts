@@ -1,20 +1,14 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class PaymentService{
-  url = 'http://localhost:9090/api/payment'
+  url = 'http://localhost:9091/api/payment'
 
   constructor(private _http: HttpClient) {}
 
-  pay(payment: any, stripe: any){
-    this._http
-      .post(`${this.url}`, payment)
-      .subscribe((data: any) => {
-        stripe.redirectToCheckout({
-          sessionId: data.id,
-        });
-      });
+  pay(amount: number, token: string, currency: string, quantity: number) : Observable<any>{
+    return this._http.post<any>(`${this.url}`, {amount: amount, token: token, currency: currency, quantity: quantity});
   }
-
 }

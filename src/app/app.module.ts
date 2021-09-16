@@ -16,6 +16,9 @@ import {OrderManagementService} from "./services/order-management.service";
 import {CurrencyConverterPipe} from "./pipes/currency-converter.pipe";
 import {JwPaginationModule} from "jw-angular-pagination";
 import {CheckoutPage} from "./pages/checkout/checkout.page";
+import {LoginPage} from "./pages/login/login.page";
+import {AuthService} from "./services/auth.service";
+import {StorageService} from "./services/storage.service";
 
 const pages = [
   HomePage,
@@ -23,7 +26,8 @@ const pages = [
   MusicEventPage,
   BuyTicketPage,
   ShoppingCartPage,
-  CheckoutPage
+  CheckoutPage,
+  LoginPage
 ];
 
 const pipes = [
@@ -47,7 +51,9 @@ const modules = [
 const providers = [
   MusicEventService,
   OrderManagementService,
-  PaymentService
+  PaymentService,
+  AuthService,
+  StorageService
 ];
 
 @NgModule({

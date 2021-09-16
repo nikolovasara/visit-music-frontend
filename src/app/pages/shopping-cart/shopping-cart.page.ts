@@ -143,7 +143,7 @@ export class ShoppingCartPage implements OnInit, AfterViewInit{
   }
 
   pay(amount){
-    this.buyTicket.checkout(amount, this.totalTickets, this.musicEvents.length)
+    this.buyTicket.checkout(amount, this.totalTickets, this.musicEvents.length, 1)
       .subscribe(result=>{
         if(result){
           this.orderManagementService.clearSessionStorage();
