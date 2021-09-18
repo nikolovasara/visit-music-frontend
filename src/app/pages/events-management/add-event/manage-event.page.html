@@ -1,0 +1,76 @@
+<div class="container">
+  <alert></alert>
+  <form class="login-page"> <!--[formGroup]="loginForm" (ngSubmit)="login()">-->
+    <div class="form-floating mb-3" >
+      <input type="text" class="form-control"
+             [ngStyle]="{'border-color':musicEventForm && !musicEventForm.musicEventName?'red':'green'}"
+             [(ngModel)]="musicEventForm==undefined? '' : musicEventForm.musicEventName"
+             tooltip="Required" [display]="musicEventForm && !musicEventForm.musicEventName"
+             id="eventName"
+             name="musicEventName"
+             placeholder="Music Event Name">
+      <label for="eventName">Name</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input  type="text" class="form-control"
+              [ngStyle]="{'border-color':musicEventForm && !musicEventForm.eventTime?'red':'green'}"
+              [(ngModel)]="musicEventForm==undefined? '' : musicEventForm.eventTime"
+              id="eventTime"
+              tooltip="Required" [display]="musicEventForm && !musicEventForm.musicEventName"
+              name="eventTime"
+              placeholder="Date & Time"
+        [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2">
+      <owl-date-time #dtPicker2></owl-date-time>
+      <label for="eventTime">Date & Time</label>
+    </div>
+    <div class="input-group row m-0">
+      <div class="form-floating mb-3 col-9 p-0" >
+        <input type="text" class="form-control" mask="0*.00"
+               [ngStyle]="{'border-color':musicEventForm && musicEventForm.ticketPrice && !musicEventForm.ticketPrice.amount?'red':'green'}"
+               [(ngModel)]="musicEventForm==undefined || musicEventForm.ticketPrice==undefined ? '' : musicEventForm.ticketPrice.amount"
+               id="ticketPrice"
+               name="amount"
+               placeholder="0.00">
+        <label for="ticketPrice">Ticket Price (0*.00)</label>
+      </div>
+      <div class="form-floating mb-3 col p-0">
+        <select class="form-select" id="currency"
+                [ngStyle]="{'border-color':musicEventForm && musicEventForm.ticketPrice && !musicEventForm.ticketPrice.currency?'red':'green'}"
+                [(ngModel)]="musicEventForm==undefined || musicEventForm.ticketPrice==undefined ? '' : musicEventForm.ticketPrice.currency"
+                aria-label="Floating label select example"
+                name="currency">
+          <option value="EUR">&euro;</option>
+          <option value="MKD">Ден.</option>
+        </select>
+        <label for="currency">Currency</label>
+      </div>
+    </div>
+    <div class="form-control mb-3 col p-0" >
+      <label for="musicPerformers">Music Performers:</label>
+      <ng-select [multiple]="true" size="5"
+                 (change)="readSelectedMusicPerformers($event)"
+                 id="musicPerformers"
+                 name="musicPerformersId"
+                 [ngStyle]="{'border-color':musicEventForm && !musicEventForm.musicPerformerIds?'red':'green'}"
+                 [(ngModel)]="musicEventForm==undefined? '' : musicEventForm.musicPerformerIds" name="musicPerformerIds">
+        <ng-option *ngFor="let musicPerformer of musicPerformers"
+                   [value]="musicPerformer.id.id">{{musicPerformer.performerName}}</ng-option>
+      </ng-select>
+    </div>
+    <div class="form-control mb-3 col p-0">
+      <label for="venue">Venue:</label>
+      <ng-select (change)="readSelectedVenue($event)"
+                  id="venue"
+                 name="venueId"
+                 [ngStyle]="{'border-color':musicEventForm && !musicEventForm.venueId?'red':'green'}"
+                 [(ngModel)]="musicEventForm==undefined? '' : musicEventForm.venueId">
+        <ng-option *ngFor="let venue of venues"
+                   [value]="venue.id.id" >{{venue.location.locationAddress}}</ng-option>
+      </ng-select>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button *ngIf="eventCreation" type="submit" (click)="createEvent(musicEventForm)" class="btn btn-success">Create</button>
+      <button *ngIf="!eventCreation" type="submit" (click)="updateEvent(musicEventForm)" class="btn btn-success">Update</button>
+    </div>
+  </form>
+</div>

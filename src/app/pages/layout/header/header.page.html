@@ -23,7 +23,7 @@
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-light" type="submit">Search</button>
       </form>
-      <button routerLink="login" class="d-inline-block ms-3 btn text-success fw-bold login-btn">Login</button>
+
     </div>
     <span class="cart-holder">
       <a href="/shopping-cart">
@@ -31,5 +31,18 @@
       </a>
       <span class='badge badge-warning' id='lblCartCount' [ngStyle]="{'background-color': itemsInCart == 0 ? 'black' : '#28b443'}" > {{itemsInCart}} </span>
     </span>
+    <button *ngIf="!isLoggedIn" routerLink="login" class="d-inline-block ms-3 btn fw-bold login-btn">Login</button>
+    <div *ngIf="isLoggedIn" class="btn-group">
+      <button id="loggedUser" type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        {{user.username}}
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Dashboard</a></li>
+        <li><a class="dropdown-item" href="#">Sales Reports</a></li>
+        <li><a class="dropdown-item" href="#">Add event</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" (click)="logout()"  href="/">Logout</a></li>
+      </ul>
+    </div>
   </div>
 </nav>

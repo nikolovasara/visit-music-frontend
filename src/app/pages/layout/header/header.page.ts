@@ -1,5 +1,9 @@
 import {Component, OnInit} from "@angular/core";
 import {OrderManagementService} from "../../../services/order-management.service";
+import {AuthService} from "../../../services/auth.service";
+import {StorageService} from "../../../services/storage.service";
+import {User} from "../../../interfaces/user.interface";
+import {AlertService} from "../../../notifications/alert";
 
 @Component({
   selector: 'header',
@@ -8,8 +12,16 @@ import {OrderManagementService} from "../../../services/order-management.service
 })
 export class HeaderPage implements OnInit{
   itemsInCart:number;
-  constructor(private orderManagementService:OrderManagementService) {
+  isLoggedIn = false;
+  user: User;
+  constructor(private orderManagementService:OrderManagementService,
+              private authService:AuthService,
+              private storageService:StorageService) {
     this.itemsInCart=0;
+    this.isLoggedIn = this.authService.isLoggedIn();
+    if(this.isLoggedIn){
+      this.user = JSON.parse(this.storageService.getItem('user'));
+    }
   }
 
   ngOnInit() {
@@ -17,6 +29,10 @@ export class HeaderPage implements OnInit{
       this.itemsInCart=this.orderManagementService.getEventsFromShoppingCart().length;
     }
     this.orderManagementService.cartHeaderIconChange.subscribe(value=>this.itemsInCart=value);
+  }
+
+  logout(){
+    this.authService.logout();
   }
 
 

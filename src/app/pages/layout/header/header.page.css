@@ -36,4 +36,16 @@
 .login-btn{
   width: 80px;
   border-bottom: 1px solid white;
+  color:white;
+  background-color: #2a949f;
+}
+
+#loggedUser{
+  background-color: #c68f05;
+  border: 1px solid black;
+  width: 100px;
+}
+
+.login-btn, #loggedUser{
+  width: 100px;
 }

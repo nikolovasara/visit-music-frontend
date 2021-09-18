@@ -1,3 +1,4 @@
+<notifier-container></notifier-container>
 <div class="logo-container">
 <!--  <img src="assets/img/logo1bb.png" class="mx-auto d-block">-->
   <img src="assets/img/logo1text.png" id="logo-text">
@@ -29,6 +30,10 @@
             <div class="col-8" id="eventTitle">
               <div class="row">
                 <h3>{{event.musicEventName}}</h3>
+                <a *ngIf="isLoggedIn" href="manage-event/{{event.id.id}}" class="btn btn-outline-light">
+                  Edit
+                  <i class="fas fa-edit"></i>
+                </a>
                <!-- <span id="ticketPrice">
                   <span *ngIf="event.ticketPrice.currency==='EUR'">&euro;</span>
                   {{event.ticketPrice.amount}}
@@ -75,6 +80,6 @@
 
 </div>
 
-<div class="card-footer justify-content-center pb-0 pt-3 w-100">
+<div class="card-footer d-flex justify-content-center pb-0 pt-3 w-100">
   <jw-pagination [pageSize]="5" [items]="musicEvents" (changePage)="onChangePage($event)"></jw-pagination>
 </div>

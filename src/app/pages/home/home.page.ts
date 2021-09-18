@@ -4,6 +4,8 @@ import {MusicEvent} from "../../interfaces/music-event.interface";
 import {tap} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {OrderManagementService} from "../../services/order-management.service";
+import {AuthService} from "../../services/auth.service";
+import {NotifierService} from "angular-notifier";
 
 @Component({
   templateUrl: 'home.page.html',
@@ -11,16 +13,20 @@ import {OrderManagementService} from "../../services/order-management.service";
 })
 export class HomePage implements OnInit{
 
+  isLoggedIn = false;
   musicEvents: MusicEvent[] = [];
   pageOfItems: Array<any>;
   clicked:Map<string,boolean>=new Map<string, boolean>();
 
   constructor(private router:Router,
               private musicEventService: MusicEventService,
-              private orderManagementService : OrderManagementService) {
+              private orderManagementService : OrderManagementService,
+              private authService: AuthService,
+              private notifierService: NotifierService) {
   }
 
   ngOnInit() {
+    this.isLoggedIn = this.authService.isLoggedIn();
     this.musicEventService.getAll()
       .pipe(
         tap((events) => {
@@ -68,6 +74,7 @@ export class HomePage implements OnInit{
     this.orderManagementService.addToShoppingCart(musicEvent);
     this.disableAddButtonsForEventsInCart();
     console.log(this.clicked)
+    this.notifierService.notify('success','Item added to cart.')
   }
 
   onChangePage(pageOfMusicEvents: Array<any>) {
