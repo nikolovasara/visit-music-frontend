@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="text-center text-danger fw-bolder mt-2 fs-4" *ngIf="searchResults.length==0">No results were found.</div>
+  <div class="text-end me-5 mt-5 fw-bolder">{{searchResults.length}} result<span *ngIf="searchResults.length>1">s</span> found.</div>
+  <table class="m-auto w-75 table table-hover text-center">
+    <thead class="table-light">
+      <tr>
+        <th>#</th>
+        <th>Date Time</th>
+        <th>Title</th>
+        <th>Performers</th>
+        <th>Location</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let result of searchResults; index as i">
+        <th class="table-light" scope="col">{{i+1}}</th>
+        <td>{{result.eventTime | customDate}} {{result.eventTime | date: 'shortTime'}}</td>
+        <td>{{result.musicEventName}}</td>
+        <td>
+          <span *ngFor="let p of result.musicPerformerList; index as j">
+            {{p.performerName}} <span *ngIf="j<result.musicPerformerList.length-1">, </span>
+          </span>
+        </td>
+        <td>{{result.venue.location.locationAddress}}</td>
+        <td>
+          <a href="music-event/{{result.id.id}}" class="viewDetails btn btn-outline-light">
+            View Details
+            <i class="fas fa-info-circle"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -27,6 +27,8 @@ import {NgSelectModule} from "@ng-select/ng-select";
 import {AlertModule} from "./notifications/alert";
 import {TooltipModule} from "ng2-tooltip-directive";
 import {NotifierModule} from "angular-notifier";
+import {SearchPage} from "./pages/search/search.page";
+import {DashboardPage} from "./pages/dashboard/dashboard.page";
 
 const pages = [
   HomePage,
@@ -36,7 +38,9 @@ const pages = [
   ShoppingCartPage,
   CheckoutPage,
   LoginPage,
-  ManageEventPage
+  ManageEventPage,
+  SearchPage,
+  DashboardPage
 ];
 
 const pipes = [

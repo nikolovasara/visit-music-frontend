@@ -50,7 +50,7 @@ export class HomePage implements OnInit{
             this.musicEvents=filtered;
           }
           this.musicEvents.sort((a,b)=>(a.eventTime>b.eventTime?1:-1))
-
+          console.log(this.musicEvents)
         })
       ).subscribe()
     this.disableAddButtonsForEventsInCart()
@@ -80,6 +80,13 @@ export class HomePage implements OnInit{
   onChangePage(pageOfMusicEvents: Array<any>) {
     // update current page of items
     this.pageOfItems = pageOfMusicEvents;
+  }
+
+  deleteEvent(id){
+    this.musicEventService.deleteMusicEvent(id)
+      .pipe(tap(success=>console.log(success)))
+      .subscribe();
+    this.musicEventService.getAll().pipe(tap(data=>this.musicEvents=data)).subscribe();
   }
 
 }

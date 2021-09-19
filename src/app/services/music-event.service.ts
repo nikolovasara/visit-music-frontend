@@ -5,6 +5,7 @@ import {StorageService} from "./storage.service";
 import {MusicPerformer} from "../interfaces/music-performer.interface";
 import {Venue} from "../interfaces/venue.interface";
 import {MusicEventForm} from "../models/forms/music-event-form.interface";
+import {Id} from "../interfaces/id.interface";
 
 @Injectable()
 export class MusicEventService{
@@ -12,14 +13,13 @@ export class MusicEventService{
   headers: HttpHeaders;
 
   constructor(private _http: HttpClient, private storageService: StorageService) {
+    if(this.storageService.getItem('user')){
+      this.headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${JSON.parse(this.storageService.getItem('user')).token}`
+      })
+    }
 
-  }
-
-  addHeaders(){
-    this.headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${JSON.parse(this.storageService.getItem('user')).token}`
-    })
   }
 
   getAll(){
@@ -31,13 +31,15 @@ export class MusicEventService{
   }
 
   createMusicEvent(formData: MusicEventForm){
-    this.addHeaders();
-    return this._http.post(`${this.url}`, formData, {headers: this.headers})
+    return this._http.post(`${this.url}`, formData)
   }
 
   updateMusicEvent(id: string, formData:MusicEventForm){
-    this.addHeaders();
     return this._http.patch(`${this.url}/${id}/edit`, formData, {headers: this.headers})
+  }
+
+  deleteMusicEvent(id: string){
+    return this._http.delete(`${this.url}/delete/${id}`,{headers: this.headers})
   }
 
   findAllPageable(page,size){
@@ -49,14 +51,15 @@ export class MusicEventService{
   }
 
   getAllMusicPerformers(){
-    this.addHeaders();
     return this._http.get<MusicPerformer[]>('http://localhost:9090/api/music-performers',  {headers: this.headers})
   }
 
   getAllVenues(){
-    this.addHeaders()
     return this._http.get<Venue[]>('http://localhost:9090/api/venues',  {headers: this.headers})
   }
 
+  findEvent(word:string){
+    return this._http.get<MusicEvent[]>(`${this.url}/search`, {params:{word:word}} );
+  }
 
 }

@@ -30,10 +30,6 @@
             <div class="col-8" id="eventTitle">
               <div class="row">
                 <h3>{{event.musicEventName}}</h3>
-                <a *ngIf="isLoggedIn" href="manage-event/{{event.id.id}}" class="btn btn-outline-light">
-                  Edit
-                  <i class="fas fa-edit"></i>
-                </a>
                <!-- <span id="ticketPrice">
                   <span *ngIf="event.ticketPrice.currency==='EUR'">&euro;</span>
                   {{event.ticketPrice.amount}}
@@ -57,18 +53,32 @@
               <i class="fas fa-angle-double-right"></i>
             </a>
           </div>
-          <div id="buyTicketsBtn" class="mt-3 text-center">
+          <div *ngIf="!isLoggedIn" id="buyTicketsBtn" class="mt-3 text-center">
             <button class="btn btn-success"  (click)="addToCart(event);" [disabled]="clicked.get(event.id.id)" ><!-- [routerLink]="['/buy-ticket']" [state]=event>-->
               <span *ngIf="clicked.get(event.id.id)==false || clicked.get(event.id.id)==undefined">Add to cart </span>
               <span *ngIf="clicked.get(event.id.id)==true">Added to cart </span><br/>
               <i class="fas fa-shopping-basket fa-2x"></i>
             </button>
           </div>
+          <div *ngIf="isLoggedIn">
+            <a href="manage-event/{{event.id.id}}" class="editBtn btn btn-warning"
+              *ngIf="event.sales<=event.venue.maxAllowedNumberOfVisitors * 0.3">
+              Edit
+              <i class="fas fa-edit"></i>
+            </a>
+            <div class="w-100 mt-4 badge bg-light text-muted" *ngIf="event.sales>event.venue.maxAllowedNumberOfVisitors * 0.3">
+              SOLD OUT
+            </div>
+            <button (click)="deleteEvent(event.id.id)" class="deleteBtn btn btn-danger">
+              Delete
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
         </div>
 
       </div>
     </div>
-    <div *ngIf="event.sales>event.venue.maxAllowedNumberOfVisitors * 0.3">
+    <div *ngIf="event.sales>event.venue.maxAllowedNumberOfVisitors * 0.3 && !isLoggedIn">
     <div class="container sold-out"></div>
     <div class="container">
       <img id="soldOutImg" src="assets/img/soldout.png"/>

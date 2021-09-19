@@ -1,0 +1,47 @@
+<div class="container">
+  <table class="mt-4 m-auto table table-dark table-hover text-center">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Date Time</th>
+      <th>Title</th>
+      <th>Performers</th>
+      <th>Location</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let musicEvent of musicEvents; index as i">
+      <th class="table-light" scope="col">{{i+1}}</th>
+      <td>{{musicEvent.eventTime | customDate}} {{musicEvent.eventTime | date: 'shortTime'}}</td>
+      <td>{{musicEvent.musicEventName}}</td>
+      <td>
+          <span *ngFor="let p of musicEvent.musicPerformerList; index as j">
+            {{p.performerName}} <span *ngIf="j<musicEvent.musicPerformerList.length-1">, </span>
+          </span>
+      </td>
+      <td>{{musicEvent.venue.location.locationAddress}}</td>
+      <td>
+        <a href="music-event/{{musicEvent.id.id}}" class="viewDetails btn btn-outline-info">
+          View Details
+          <i class="fas fa-info-circle"></i>
+        </a>
+      </td>
+      <td>
+        <a href="manage-event/{{musicEvent.id.id}}" class="viewDetails btn btn-outline-warning">
+          Edit
+          <i class="fas fa-edit"></i>
+        </a>
+      </td>
+      <td>
+        <a href="#" (click)="deleteEvent(musicEvent.id.id)" class="viewDetails btn btn-outline-danger">
+          Delete
+          <i class="fas fa-trash"></i>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
