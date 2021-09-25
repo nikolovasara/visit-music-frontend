@@ -1,18 +1,20 @@
-<div class="login-page">
-  <div>
+<div class="container card">
+  <form class="login-page" [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="form-floating mb-3" >
+      <input type="text" class="form-control" formControlName="username" id="username" placeholder="username">
+      <label for="username">Username</label>
+    </div>
+    <div class="form-floating mb-3" >
+      <input type="password" class="form-control" formControlName="password" id="password" placeholder="password">
+      <label for="password">Password</label>
+    </div>
+    <div class="d-flex justify-content-end">
 
-    <form class="custom-form shadow" [formGroup]="loginForm" (ngSubmit)="login()">
-      <div class="form-outline mb-4">
-        <input type="text" id="username" formControlName="username" class="form-control"/>
-        <label class="form-label" for="username">Username</label>
-      </div>
-      <div class="form-outline mb-4">
-        <input type="password" id="password" formControlName="password" class="form-control"/>
-        <label class="form-label" for="password">Password</label>
-      </div>
-      <button type="submit" class="btn btn-color btn-block">Log in</button>
-    </form>
-    <span class="disclaimer"><small>Contact the clinic for providing credentials at <a href="tel:+38978726553">+38978726553</a></small></span>
-  </div>
+      <button type="submit" class="btn btn-success">Log in</button>
 
+    </div>
+  </form>
+  <footer class="mt-auto d-flex justify-content-end">
+    <img src="assets/img/logo1text.png" id="logo-text">
+  </footer>
 </div>

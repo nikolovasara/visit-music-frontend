@@ -1,4 +1,4 @@
-export interface TicketPrice {
+export interface Money {
   currency: string;
   amount: number;
 }

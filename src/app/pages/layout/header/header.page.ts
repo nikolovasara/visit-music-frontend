@@ -1,5 +1,10 @@
 import {Component, OnInit} from "@angular/core";
 import {OrderManagementService} from "../../../services/order-management.service";
+import {AuthService} from "../../../services/auth.service";
+import {StorageService} from "../../../services/storage.service";
+import {User} from "../../../interfaces/user.interface";
+import {AlertService} from "../../../notifications/alert";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'header',
@@ -7,9 +12,19 @@ import {OrderManagementService} from "../../../services/order-management.service
   styleUrls: ['header.page.css']
 })
 export class HeaderPage implements OnInit{
+  searchContent = '';
   itemsInCart:number;
-  constructor(private orderManagementService:OrderManagementService) {
+  isLoggedIn = false;
+  user: User;
+  constructor(private orderManagementService:OrderManagementService,
+              private authService:AuthService,
+              private storageService:StorageService,
+              private router: Router) {
     this.itemsInCart=0;
+    this.isLoggedIn = this.authService.isLoggedIn();
+    if(this.isLoggedIn){
+      this.user = JSON.parse(this.storageService.getItem('user'));
+    }
   }
 
   ngOnInit() {
@@ -19,5 +34,12 @@ export class HeaderPage implements OnInit{
     this.orderManagementService.cartHeaderIconChange.subscribe(value=>this.itemsInCart=value);
   }
 
+  logout(){
+    this.authService.logout();
+  }
+
+  search(key){
+    this.router.navigate(['search'], {queryParams: {q: key}});
+  }
 
 }

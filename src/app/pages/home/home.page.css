@@ -67,6 +67,12 @@
   font-size: 20px;
 }
 
+.deleteBtn, .editBtn{
+  height:40px;
+  width: 150px;
+  margin-top: 10px;
+}
+
 #eventTitle{
   position: relative;
   height: 120px;
@@ -107,10 +113,6 @@ li{
   border: 1px solid black;
   display: inline-block;
   margin-right: 2px;
-}
-
-.fill-gap{
-  height: 250px;
 }
 
 .sold-out{

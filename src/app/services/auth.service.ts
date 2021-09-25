@@ -36,4 +36,16 @@ export class AuthService {
   deleteById(userId) {
     return this._http.delete(`${this.baseUrl}delete/${userId}`, {headers: this.headers})
   }
+
+  isLoggedIn(){
+    if(localStorage.getItem('user') == null) {
+    return false;
+    }
+    return true;
+  }
+
+  logout(){
+    localStorage.removeItem('user');
+  }
+
 }

@@ -8,7 +8,7 @@ export class PaymentService{
 
   constructor(private _http: HttpClient) {}
 
-  pay(amount: number, token: string, currency: string, quantity: number) : Observable<any>{
-    return this._http.post<any>(`${this.url}`, {amount: amount, token: token, currency: currency, quantity: quantity});
+  pay(amount: number, token: string, currency: string) : Observable<any>{
+    return this._http.post<any>(`${this.url}`, {amount: amount, token: token, currency: currency});
   }
 }

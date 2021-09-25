@@ -20,16 +20,37 @@
         </li>
       </ul>
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light" type="submit">Search</button>
+        <input class="form-control me-2" type="search" name="search" [(ngModel)]="searchContent" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-light" (click)="search(searchContent)" type="submit">Search</button>
       </form>
-      <button routerLink="login" class="d-inline-block ms-3 btn text-success fw-bold login-btn">Login</button>
+
     </div>
-    <span class="cart-holder">
+    <span class="cart-holder" *ngIf="!isLoggedIn">
       <a href="/shopping-cart">
         <i data-count="1" class="fas fa-shopping-cart text-white fa-2x"></i>
       </a>
       <span class='badge badge-warning' id='lblCartCount' [ngStyle]="{'background-color': itemsInCart == 0 ? 'black' : '#28b443'}" > {{itemsInCart}} </span>
     </span>
+    <button *ngIf="!isLoggedIn" routerLink="login" class="d-inline-block ms-3 btn fw-bold login-btn">Login</button>
+    <div *ngIf="isLoggedIn" class="ms-4 btn-group">
+      <button id="loggedUser" type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        {{user.username}}
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="/dashboard">
+          <i class="fas fa-columns text-info"></i>
+          Dashboard</a></li>
+        <li><a class="dropdown-item" href="/sales-report">
+          <i class="fas fa-chart-line"></i>
+          Sales Reports</a></li>
+        <li><a class="dropdown-item" href="/manage-event">
+          <i class="fas fa-plus-circle text-success"></i>
+          Add event
+            </a>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" (click)="logout()"  href="/">Logout</a></li>
+      </ul>
+    </div>
   </div>
 </nav>

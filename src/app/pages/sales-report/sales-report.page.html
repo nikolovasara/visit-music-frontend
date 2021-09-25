@@ -1,0 +1,19 @@
+<div class="container">
+  <table class="table table-responsive">
+    <tr *ngFor="let order of orders">
+      <td>{{order.createdOn}}</td>
+      <td>{{order.total.amount}}</td>
+      <td>{{order.total.currency}}</td>
+      <td><div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          Dropdown button
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li *ngFor="let eventTicket of order.eventTicketList"><a class="dropdown-item" href="/music-event/{{eventTicket.musicEventId.id}}">{{eventTicket.musicEventId.id}}</a> : {{eventTicket.quantity}}</li>
+        </ul>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+</div>

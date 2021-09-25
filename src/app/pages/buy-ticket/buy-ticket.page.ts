@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {Subject} from "rxjs";
 import {PaymentService} from "../../services/payment.service";
+import {formatCurrency} from "@angular/common";
 
 @Component({
   selector: 'payment',
@@ -19,16 +20,17 @@ export class BuyTicketPage implements OnInit{
     this.stripePaymentGateway();
   }
 
-  checkout(amount, totalTickets, totalEvents, quantity) {
+  checkout(amount, currency, totalTickets, totalEvents, quantity) {
     const serv = this._service;
     const result = new Subject<boolean>();
     const strikeCheckout = (<any>window).StripeCheckout.configure({
       key: 'pk_test_51JIHFwDDBoQMYZf5joYnEYlKyRaCJhQNMD2IZqTPatZphEZZEimPRlcJC44UQfTZZZlQQNoHZ7PWLaYAW11o3Cvo00aUEUe0jA',
       locale: 'auto',
+      currency: currency=='MKD'? 'mkd' : 'eur',
       token: function (stripeToken: any) {
         console.log(stripeToken)
         alert('Stripe token generated!');
-        serv.pay(amount, stripeToken.id, 'USD', quantity).subscribe();
+        serv.pay(amount, stripeToken.id, currency).subscribe();
         result.next(true);
       }
     });

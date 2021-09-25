@@ -19,6 +19,17 @@ import {CheckoutPage} from "./pages/checkout/checkout.page";
 import {LoginPage} from "./pages/login/login.page";
 import {AuthService} from "./services/auth.service";
 import {StorageService} from "./services/storage.service";
+import {ManageEventPage} from "./pages/events-management/add-event/manage-event.page";
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {NgxMaskModule} from "ngx-mask";
+import {NgSelectModule} from "@ng-select/ng-select";
+import {AlertModule} from "./notifications/alert";
+import {TooltipModule} from "ng2-tooltip-directive";
+import {NotifierModule} from "angular-notifier";
+import {SearchPage} from "./pages/search/search.page";
+import {DashboardPage} from "./pages/dashboard/dashboard.page";
+import {SalesReportPage} from "./pages/sales-report/sales-report.page";
 
 const pages = [
   HomePage,
@@ -27,7 +38,11 @@ const pages = [
   BuyTicketPage,
   ShoppingCartPage,
   CheckoutPage,
-  LoginPage
+  LoginPage,
+  ManageEventPage,
+  SearchPage,
+  DashboardPage,
+  SalesReportPage
 ];
 
 const pipes = [
@@ -41,11 +56,31 @@ const components = [
 
 const modules = [
   BrowserModule,
+  BrowserAnimationsModule,
   AppRoutingModule,
   HttpClientModule,
   ReactiveFormsModule,
   FormsModule,
-  JwPaginationModule
+  AlertModule,
+  JwPaginationModule,
+  OwlDateTimeModule,
+  OwlNativeDateTimeModule,
+  NgxMaskModule.forRoot(),
+  NgSelectModule,
+  TooltipModule,
+  NotifierModule.withConfig({position: {
+
+      horizontal: {
+        position: 'right',
+        distance: 12
+      },
+      vertical: {
+        position: 'top',
+        distance: 12,
+        gap: 10
+      }
+    }
+  })
 ];
 
 const providers = [

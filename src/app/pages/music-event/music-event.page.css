@@ -1,11 +1,11 @@
 .details-card{
-  height: 600px;
   margin-top:20px;
   background-color: white;
   width: 1036px;
   padding: 10px;
   margin-bottom: 50px;
-  border:2px solid darkslategrey;
+  border:2px solid #9c67a4;
+
 }
 
 .wrapper{
@@ -36,7 +36,8 @@
   margin: 0 0 20px 0;
   width: 1036px;
   height: 150px;
-  border:2px solid darkslategrey;
+  border:2px solid #9c67a4;
+  font-family: monospace;
 
 }
 
@@ -49,10 +50,6 @@
 }
 
 .card-body{
-  height: 100px;
-}
-
-.card-body .row{
   height: 100px;
 }
 
@@ -70,37 +67,37 @@
 }
 div div.container{
   position: relative;
-  height: 600px;
   margin-bottom: 50px;
 }
 
 #ticketPrice{
-  color: #0e9e65;
+  color: white;
   font-size: 28px;
   font-weight: bold;
-  text-align: center;
-  line-height: 120px;
   height: 146px;
   width: 200px;
   padding: 0 30px;
-  background-color: white;
-  border:10px solid #269c76;
+  background: rgb(4,108,59);
+  background: linear-gradient(90deg, rgba(4,108,59,1) 0%, rgba(29,191,151,1) 50%, rgba(9,121,69,1) 100%);
   position: absolute;
-  top:-1px;
+  top:0px;
   right:0;
   border-radius: 1px;
+  border-left: 5px dashed black;
 }
 
 .venue img, .musicPerformers img{
-  width: 250px;
+  width: 150px;
+  opacity: 0.2;
 }
 
 .description img{
-  width: 200px;
+  width: 100px;
+  opacity: 0.2;
 }
 
 .details-card .row:nth-child(2), .details-card .row:nth-child(3){
-  border-top: 1px solid #5dbd69;
+  border-top: 1px solid rgba(156, 103, 164, 0.24);
 }
 
 .details-card .row{
@@ -109,21 +106,18 @@ div div.container{
 }
 
 .musicPerformers{
-  font-size: 25px;
+  font-size: 20px;
   color: #0d374e;
   font-family: 'Droid serif', serif;
 }
 
 .row b{
-  color: #0d374e;
+  color: #ffffff;
   font-family: 'Righteous', cursive;
   text-decoration: underline;
 }
 
-span span {
-  display: inline-block;
-  width: 200px;
-}
+
 li span{
   padding-left: 20px;
   display: inline;
@@ -131,19 +125,23 @@ li span{
 
 .venue span{
   display: block;
-  margin-top: 20px;
+  margin-top: 10px;
   color: #0d4e3c;
-  font-size: 20px;
+  font-size: 18px;
+  font-family: 'Droid serif', serif;
 }
 
-.fill-gap{
-  height: 150px;
+#ticketPrice>span{
+  display: inline-block;
+  margin: 10px auto auto;
+  position: relative;
+  top:15px;
 }
-
+/*
 .eventDetails{
   background-image: url("../../../assets/img/siteBgGreen.png");
   background-repeat: repeat;
   background-size: 300px;
   background-attachment: scroll;
   padding-top:50px;
-}
+}*/
