@@ -8,6 +8,7 @@ import {LoginPage} from "./pages/login/login.page";
 import {ManageEventPage} from "./pages/events-management/add-event/manage-event.page";
 import {SearchPage} from "./pages/search/search.page";
 import {DashboardPage} from "./pages/dashboard/dashboard.page";
+import {SalesReportPage} from "./pages/sales-report/sales-report.page";
 
 const routes: Routes = [
   {
@@ -53,6 +54,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardPage
+  },
+  {
+    path: 'sales-report',
+    component: SalesReportPage
   }
 ];
 

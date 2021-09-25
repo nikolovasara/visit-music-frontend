@@ -1,32 +1,30 @@
-<div class="eventDetails">
-  <div class="card mx-auto mt-4 p-4">
+<div class="eventDetails ">
+  <div class="card mx-auto mt-4 p-4 w-50 bg-light">
     <div class="row">
       <div class="card-body col ">
         <div class="row">
-          <div class="col">
-            <div class="row">
-              <div class="col-4"><i class="fas fa-clock fa-3x d-inline-block mx-2"></i></div>
-              <div class="col" style="font-size: 18px">
-                {{musicEvent.eventTime | customDate}} <br/>
-                {{musicEvent.eventTime | date: 'shortTime'}}
-              </div>
-            </div>
+          <div class="row">
+            <h3>{{musicEvent.musicEventName}}</h3>
           </div>
-          <div class="col-9" id="eventTitle">
-            <div class="row">
-              <h3>{{musicEvent.musicEventName}}</h3>
-            </div>
+          <div class="row w-75" style="position: relative">
+            <span class="p-1" style="position: absolute;top:30px;font-family: monospace"> <i
+              class="fas fa-clock d-inline-block mx-2"></i>
+              {{musicEvent.eventTime | customDate}}
+              {{musicEvent.eventTime | date: 'shortTime'}}
+            </span>
           </div>
           <div class="col" id="ticketPrice">
-            <span *ngIf="musicEvent.ticketPrice.currency==='EUR'">&euro;</span>
-            {{musicEvent.ticketPrice.amount}}
-            <span *ngIf="musicEvent.ticketPrice.currency==='MKD'">Ден.</span>
+            <span class="text-center">
+              <span *ngIf="musicEvent.ticketPrice.currency==='EUR'">&euro;</span>
+                {{musicEvent.ticketPrice.amount}}
+              <span *ngIf="musicEvent.ticketPrice.currency==='MKD'">Ден.</span>
+            </span>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="container mx-auto details-card">
+  <div class="container mx-auto details-card w-50 bg-light">
     <div class="row musicPerformers">
       <div class="col-3">
         <img src="assets/img/musicPeformer.png"/>
@@ -36,7 +34,8 @@
           <li class="row" *ngFor="let mp of musicEvent.musicPerformerList">
           <span>
             <i class="fas fa-dot-circle fa-xs d-inline-block mx-2"></i>
-            {{mp.performerName}} - {{mp.country}}<span class="text-center"><b>{{mp.genre}}</b></span>
+            {{mp.performerName}}<span class="small"> ({{mp.country}})</span>&nbsp;&nbsp; <span
+            class="badge bg-dark p-2"><b>{{mp.genre}}</b></span>
           </span>
           </li>
         </ul>
@@ -47,21 +46,24 @@
         <img src="assets/img/venue.png"/>
       </div>
       <div class="col">
-        <div class="row">
+        <div class="row p-0">
+
           <div class="col mx-1">
-          <span>
-            <i class="fas fa-users fa-2x d-inline-block mx-2"></i> Capacity: {{musicEvent.venue.maxAllowedNumberOfVisitors}}
+            <span>
+            <i class="fas fa-road d-inline-block mx-2"></i> {{musicEvent.venue.location.locationAddress}}
           </span>
             <span>
-            <i class="fas fa-search-location fa-2x d-inline-block mx-2"></i> Location type: {{musicEvent.venue.locationType}}
+            <i class="fas fa-city d-inline-block mx-2"></i> {{musicEvent.venue.location.city}}
+              , {{musicEvent.venue.location.country}}
           </span>
+
           </div>
           <div class="col">
           <span>
-            <i class="fas fa-city fa-2x d-inline-block mx-2"></i> {{musicEvent.venue.location.city}}, {{musicEvent.venue.location.country}}
+            <i class="fas fa-users d-inline-block mx-2"></i> Capacity: {{musicEvent.venue.maxAllowedNumberOfVisitors}}
           </span>
             <span>
-            <i class="fas fa-road fa-2x d-inline-block mx-2"></i> {{musicEvent.venue.location.locationAddress}}
+            <i class="fas fa-search-location d-inline-block mx-2"></i> Location type: {{musicEvent.venue.locationType | lowercase}}
           </span>
           </div>
         </div>

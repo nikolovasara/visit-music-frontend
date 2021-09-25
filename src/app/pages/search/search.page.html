@@ -4,7 +4,6 @@
   <table class="m-auto w-75 table table-hover text-center">
     <thead class="table-light">
       <tr>
-        <th>#</th>
         <th>Date Time</th>
         <th>Title</th>
         <th>Performers</th>
@@ -14,7 +13,6 @@
     </thead>
     <tbody>
       <tr *ngFor="let result of searchResults; index as i">
-        <th class="table-light" scope="col">{{i+1}}</th>
         <td>{{result.eventTime | customDate}} {{result.eventTime | date: 'shortTime'}}</td>
         <td>{{result.musicEventName}}</td>
         <td>

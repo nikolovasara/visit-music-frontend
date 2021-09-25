@@ -29,6 +29,7 @@ import {TooltipModule} from "ng2-tooltip-directive";
 import {NotifierModule} from "angular-notifier";
 import {SearchPage} from "./pages/search/search.page";
 import {DashboardPage} from "./pages/dashboard/dashboard.page";
+import {SalesReportPage} from "./pages/sales-report/sales-report.page";
 
 const pages = [
   HomePage,
@@ -40,7 +41,8 @@ const pages = [
   LoginPage,
   ManageEventPage,
   SearchPage,
-  DashboardPage
+  DashboardPage,
+  SalesReportPage
 ];
 
 const pipes = [
@@ -66,7 +68,19 @@ const modules = [
   NgxMaskModule.forRoot(),
   NgSelectModule,
   TooltipModule,
-  NotifierModule
+  NotifierModule.withConfig({position: {
+
+      horizontal: {
+        position: 'right',
+        distance: 12
+      },
+      vertical: {
+        position: 'top',
+        distance: 12,
+        gap: 10
+      }
+    }
+  })
 ];
 
 const providers = [
