@@ -8,6 +8,7 @@ import {MusicEvent} from "../../interfaces/music-event.interface";
 import {MusicEventService} from "../../services/music-event.service";
 import {Order} from "../../interfaces/order.interface";
 import {tap} from "rxjs/operators";
+import {renderConstantPool} from "@angular/compiler-cli/ngcc/src/rendering/renderer";
 
 @Component({
   templateUrl: 'sales-report.page.html',
@@ -15,16 +16,42 @@ import {tap} from "rxjs/operators";
 })
 export class SalesReportPage implements OnInit{
   public orders: Order[];
+  musicEvents: MusicEvent[];
   constructor(private orderService: OrderManagementService,
               private musicEventService: MusicEventService) {
   }
 
   ngOnInit(): void{
     this.orderService.getAllOrders().pipe(tap(data=>{
-      this.orders = data
+      this.orders = data.sort((a,b)=>(a.eventTime>b.eventTime?1:-1))
       console.log(this.orders);
     }))
       .subscribe();
-
+    this.musicEventService.getAll().pipe(tap(data=>{
+      this.musicEvents = data
+      console.log(this.musicEvents);
+    }))
+      .subscribe();
   }
+
+  getMusicEventById(id: string){
+    return this.musicEvents.find(me=>me.id.id === id);
+  }
+
+  calculateRemainingTicketsForEvent(id: string){
+    let event = this.getMusicEventById(id);
+    return (event.venue.maxAllowedNumberOfVisitors*0.3) - event.sales;
+  }
+
+  getRemainingTicketsClass(id: string){
+    let remaining = this.calculateRemainingTicketsForEvent(id);
+    if(remaining <= 10){
+      return 'bg-danger';
+    }
+    else if(remaining<50){
+      return 'bg-warning';
+    }
+    return '';
+  }
+
 }

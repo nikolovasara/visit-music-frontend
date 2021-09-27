@@ -1,5 +1,5 @@
 <div class="container">
-  <table class="mt-4 m-auto table table-dark table-hover text-center">
+  <table class="mt-4 m-auto table table-secondary table-hover text-center">
     <thead>
     <tr>
       <th>#</th>
@@ -24,19 +24,19 @@
       </td>
       <td>{{musicEvent.venue.location.locationAddress}}</td>
       <td>
-        <a href="music-event/{{musicEvent.id.id}}" class="viewDetails btn btn-outline-info">
+        <a href="music-event/{{musicEvent.id.id}}" class="viewDetails btn btn-info">
           View Details
           <i class="fas fa-info-circle"></i>
         </a>
       </td>
       <td>
-        <a href="manage-event/{{musicEvent.id.id}}" class="viewDetails btn btn-outline-warning">
+        <a href="manage-event/{{musicEvent.id.id}}" class="viewDetails btn btn-warning">
           Edit
           <i class="fas fa-edit"></i>
         </a>
       </td>
       <td>
-        <a href="#" (click)="deleteEvent(musicEvent.id.id)" class="viewDetails btn btn-outline-danger">
+        <a href="#" (click)="deleteEvent(musicEvent.id.id)" class="viewDetails btn btn-danger">
           Delete
           <i class="fas fa-trash"></i>
         </a>

@@ -2,4 +2,30 @@
   overflow-y: visible !important;
 }
 
+.custom{
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background: rgb(15,9,18);
+  background: radial-gradient(circle, rgba(15,9,18,1) 0%, rgba(87,54,134,1) 81%, rgba(18,11,19,1) 100%, rgba(245,214,243,1) 100%);
+}
+a{
+  text-decoration: none;
+  color:black;
+}
+a:hover{
+  color: #413276;
+  text-decoration: underline;
+  font-size: large;
+}
+th{
+  vertical-align: middle;
+}
+
+td, th{
+  padding: 20px 10px;
+}
+
+table{
+  border-radius: 10px;
+}
 
