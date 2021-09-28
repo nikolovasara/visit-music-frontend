@@ -154,33 +154,31 @@ export class ShoppingCartPage implements OnInit, AfterViewInit {
   }
 
   orderCreated(amount) {
-    this.pay(amount);
-    /* let musicEvent;
-    this.musicEventService.getById('dd59680e-8955-4083-bcf9-611e60e0c23a').subscribe(
-      data=> {
-        musicEvent=data;
-        this.createOrder(musicEvent);
+    this.pay(amount).subscribe(result => {
+      if (result) {
+        this.persistOrder();
+        this.orderManagementService.clearSessionStorage();
+        this.totalTickets = 0;
+        this.getFromSessionStorage();
       }
-    );*/
+    });
 
+    console.log("ORDER CREATED");
+  }
+
+  persistOrder(){
     let orderForm = new OrderForm();
     orderForm.total = { amount: this.total, currency: this.musicEvents[0].ticketPrice.currency};
     this.musicEvents.forEach(event=> orderForm.tickets.push({musicEvent: event, quantity: this.ticketsByEvent.get(event.id.id)}));
 
-    this.orderManagementService.createOrder(orderForm).subscribe(data=>console.log(data));
-
-    this.total = 0;
-    console.log("ORDER CREATED");
+    this.orderManagementService.createOrder(orderForm).subscribe(data=>{
+      console.log(data)
+      this.total = 0;
+    });
   }
 
   pay(amount) {
-    this.buyTicket.checkout(amount, this.musicEvents[0].ticketPrice.currency, this.totalTickets, this.musicEvents.length, 1)
-      .subscribe(result => {
-        if (result) {
-          this.orderManagementService.clearSessionStorage();
-          this.totalTickets = 0;
-          this.getFromSessionStorage();
-        }
-      });
+    return this.buyTicket.checkout(amount, this.musicEvents[0].ticketPrice.currency, this.totalTickets, this.musicEvents.length, 1)
+
   }
 }
