@@ -168,6 +168,8 @@ export class ShoppingCartPage implements OnInit, AfterViewInit {
 
   persistOrder(){
     let orderForm = new OrderForm();
+    orderForm.buyerEmail = this.buyTicket.buyerEmail;
+    console.log("BUYER:", orderForm.buyerEmail);
     orderForm.total = { amount: this.total, currency: this.musicEvents[0].ticketPrice.currency};
     this.musicEvents.forEach(event=> orderForm.tickets.push({musicEvent: event, quantity: this.ticketsByEvent.get(event.id.id)}));
 

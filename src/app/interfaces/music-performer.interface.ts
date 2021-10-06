@@ -6,3 +6,7 @@ export interface MusicPerformer {
   country: string;
   genre: string;
 }
+
+export enum Genre{
+  ROCK, JAZZ, POP, BLUES, FOLK, COUNTRY, METAL, HEAVY_METAL, HIP_HOP, ELECTRONIC, MARIACHI
+}

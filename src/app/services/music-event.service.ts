@@ -6,6 +6,8 @@ import {MusicPerformer} from "../interfaces/music-performer.interface";
 import {Venue} from "../interfaces/venue.interface";
 import {MusicEventForm} from "../models/forms/music-event-form.interface";
 import {Id} from "../interfaces/id.interface";
+import {VenueForm} from "../models/forms/venue-form.interface";
+import {PerformerForm} from "../models/forms/performer-form.interface";
 
 @Injectable()
 export class MusicEventService{
@@ -60,6 +62,14 @@ export class MusicEventService{
 
   findEvent(word:string){
     return this._http.get<MusicEvent[]>(`${this.url}/search`, {params:{word:word}} );
+  }
+
+  createVenue(formData: VenueForm){
+    return this._http.post(`http://localhost:9090/api/venues`, formData)
+  }
+
+  createPerformer(formData: PerformerForm){
+    return this._http.post(`http://localhost:9090/api/music-performers`, formData)
   }
 
 }

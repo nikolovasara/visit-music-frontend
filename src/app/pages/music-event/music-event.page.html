@@ -1,7 +1,21 @@
-<div class="eventDetails ">
-  <div class="card mx-auto mt-4 p-4 w-50 bg-light">
+<div class="eventDetails mt-5">
+  <div *ngIf="isLoggedIn" id="editBtn" class="mt-2 w-50 p-4 text-center container">
+    <a href="manage-event/{{musicEvent.id.id}}" class="editBtn w-50 btn btn-warning"
+       *ngIf="musicEvent.sales<=musicEvent.venue.maxAllowedNumberOfVisitors * 0.3">
+      Edit
+      <i class="fas fa-edit"></i>
+    </a>
+    <div class="w-100 mt-4 badge bg-light text-muted" *ngIf="musicEvent.sales>musicEvent.venue.maxAllowedNumberOfVisitors * 0.3">
+      SOLD OUT
+    </div>
+    <button (click)="deleteEvent(musicEvent.id.id)" class="deleteBtn ms-5 btn btn-danger">
+      Delete
+      <i class="fas fa-trash"></i>
+    </button>
+  </div>
+  <div class="card mx-auto mt-0 p-4 w-50 bg-light">
     <div class="row">
-      <div class="card-body col ">
+      <div class="card-body col ps-4">
         <div class="row">
           <div class="row">
             <h3>{{musicEvent.musicEventName}}</h3>
@@ -13,7 +27,7 @@
               {{musicEvent.eventTime | date: 'shortTime'}}
             </span>
           </div>
-          <div class="col" id="ticketPrice">
+          <div class="col p-0" id="ticketPrice">
             <span class="text-center">
               <span *ngIf="musicEvent.ticketPrice.currency==='EUR'">&euro;</span>
                 {{musicEvent.ticketPrice.amount}}
@@ -30,12 +44,12 @@
         <img src="assets/img/musicPeformer.png"/>
       </div>
       <div class="col">
-        <ul>
+        <ul class="p-0">
           <li class="row" *ngFor="let mp of musicEvent.musicPerformerList">
           <span>
-            <i class="fas fa-dot-circle fa-xs d-inline-block mx-2"></i>
+            <i class="fas fa-microphone-alt fa-xs d-inline-block me-2"></i>
             {{mp.performerName}}<span class="small"> ({{mp.country}})</span>&nbsp;&nbsp; <span
-            class="badge bg-dark p-2"><b>{{mp.genre}}</b></span>
+            class="badge bg-danger p-2"><b>{{mp.genre}}</b></span>
           </span>
           </li>
         </ul>
@@ -53,8 +67,7 @@
             <i class="fas fa-road d-inline-block mx-2"></i> {{musicEvent.venue.location.locationAddress}}
           </span>
             <span>
-            <i class="fas fa-city d-inline-block mx-2"></i> {{musicEvent.venue.location.city}}
-              , {{musicEvent.venue.location.country}}
+            <i class="fas fa-city d-inline-block mx-2"></i> {{musicEvent.venue.location.city}}, {{musicEvent.venue.location.country}}
           </span>
 
           </div>
@@ -70,11 +83,16 @@
       </div>
     </div>
     <div class="row description">
-      <div class="col-3">
-        <img src="assets/img/info.jpg"/>
+      <div *ngIf="!isLoggedIn" id="buyTicketsBtn" class="text-center">
+        <button class="btn btn-outline-success text-light w-75"  (click)="addToCart(musicEvent);" [disabled]="inCart" ><!-- [routerLink]="['/buy-ticket']" [state]=event>-->
+          <span *ngIf="inCart">Added to cart </span>
+          <i class="fas fa-shopping-basket fa-2x "></i>
+        </button>
       </div>
+
     </div>
+
+
   </div>
-  <div class="fill-gap"></div>
 
 </div>

@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {HomePage} from "./pages/home/home.page";
 import {MusicEventPage} from "./pages/music-event/music-event.page";
 import {BuyTicketPage} from "./pages/buy-ticket/buy-ticket.page";
@@ -9,6 +9,8 @@ import {ManageEventPage} from "./pages/events-management/add-event/manage-event.
 import {SearchPage} from "./pages/search/search.page";
 import {DashboardPage} from "./pages/dashboard/dashboard.page";
 import {SalesReportPage} from "./pages/sales-report/sales-report.page";
+import {AddVenuePage} from "./pages/events-management/add-venue/add-venue.page";
+import {AddPerformerPage} from "./pages/events-management/add-performer/add-performer.page";
 
 const routes: Routes = [
   {
@@ -16,12 +18,12 @@ const routes: Routes = [
     component: HomePage
   },
   {
-    path:'macedonia',
+    path: 'macedonia',
     component: HomePage
   },
   {
-    path:'world',
-    component:HomePage
+    path: 'world',
+    component: HomePage
   },
   {
     path: 'music-event/:id',
@@ -58,6 +60,14 @@ const routes: Routes = [
   {
     path: 'sales-report',
     component: SalesReportPage
+  },
+  {
+    path: 'add-venue',
+    component: AddVenuePage
+  },
+  {
+    path: 'add-performer',
+    component: AddPerformerPage
   }
 ];
 
@@ -65,4 +75,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

@@ -1,0 +1,38 @@
+<notifier-container></notifier-container>
+<div class="container bg-light w-50">
+  <form class="venue-page w-75 mx-auto mt-5 py-5">
+    <div class="form-floating mb-3" >
+      <input class="form-control"
+             [ngStyle]="{'border-color':performerForm && !performerForm.performerName ?'red':'green'}"
+             [(ngModel)]="performerForm.performerName"
+             tooltip="Required" [display]="performerForm && !performerForm.performerName"
+             id="performerName"
+             name="performerName"
+             placeholder="Name">
+      <label for="performerName">Name</label>
+    </div>
+    <div class="form-floating mb-3" >
+      <input class="form-control"
+             [ngStyle]="{'border-color':performerForm && !performerForm.country ?'red':'green'}"
+             [(ngModel)]="performerForm.country"
+             tooltip="Required" [display]="performerForm && !performerForm.country"
+             id="country"
+             name="country"
+             placeholder="Country">
+      <label for="country">Country</label>
+    </div>
+    <div class="form-control mb-3 p-0" >
+      <label for="locationType">Type</label>
+      <ng-select (change)="readSelectedType($event)"
+                 id="locationType"
+                 [ngStyle]="{'border-color':performerForm && !performerForm.genre ?'red':'green'}"
+                 aria-label="Floating label select example"
+                 name="locationType">
+        <ng-option  *ngFor="let t of genres" [value]="t" >{{t | lowercase}}</ng-option>
+      </ng-select>
+    </div>
+    <div class="d-flex justify-content-end mb-5">
+      <button type="submit" (click)="createPerformer(performerForm)" class="btn btn-success">Create</button>
+    </div>
+  </form>
+</div>

@@ -30,6 +30,8 @@ import {NotifierModule} from "angular-notifier";
 import {SearchPage} from "./pages/search/search.page";
 import {DashboardPage} from "./pages/dashboard/dashboard.page";
 import {SalesReportPage} from "./pages/sales-report/sales-report.page";
+import {AddVenuePage} from "./pages/events-management/add-venue/add-venue.page";
+import {AddPerformerPage} from "./pages/events-management/add-performer/add-performer.page";
 
 const pages = [
   HomePage,
@@ -40,6 +42,8 @@ const pages = [
   CheckoutPage,
   LoginPage,
   ManageEventPage,
+  AddVenuePage,
+  AddPerformerPage,
   SearchPage,
   DashboardPage,
   SalesReportPage

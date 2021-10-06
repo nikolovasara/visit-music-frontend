@@ -1,0 +1,22 @@
+.venue-page{
+  width: 700px;
+
+  margin: auto;
+  padding-top: 50px;
+}
+.form-floating{
+  padding-left: 0;
+}
+button{
+  width:200px;
+  background-color: #413276;
+  border-color: black;
+}
+
+.container{
+  min-height: 100%;
+  height: 100%;
+  margin-top:30px;
+  border-bottom:10px solid #e8689f;
+  border-radius: 5px;
+}

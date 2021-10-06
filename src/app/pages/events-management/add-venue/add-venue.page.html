@@ -1,0 +1,60 @@
+<notifier-container></notifier-container>
+<div class="container bg-light w-50">
+  <form class="venue-page">
+    <div class="input-group row m-0">
+      <div class="form-floating mb-3 col-7" >
+        <input type="text" class="form-control"
+               [ngStyle]="{'border-color':venueForm && !venueForm.location.locationAddress ?'red':'green'}"
+               [(ngModel)]="venueForm.location.locationAddress"
+               tooltip="Required" [display]="venueForm && !venueForm.location.locationAddress"
+               id="locationAddress"
+               name="locationAddress"
+               placeholder="Address">
+        <label for="locationAddress">Address</label>
+      </div>
+      <div class="form-floating mb-3 col-2" >
+        <input type="text" class="form-control"
+               [ngStyle]="{'border-color':venueForm && !venueForm.location.city ?'red':'green'}"
+               [(ngModel)]="venueForm.location.city"
+               tooltip="Required" [display]="venueForm && !venueForm.location.city"
+               id="city"
+               name="city"
+               placeholder="City">
+        <label for="city">City</label>
+      </div>
+      <div class="form-floating mb-3 col-3" >
+        <input type="text" class="form-control"
+               [ngStyle]="{'border-color':venueForm && !venueForm.location.country ?'red':'green'}"
+               [(ngModel)]="venueForm.location.country"
+               tooltip="Required" [display]="venueForm && !venueForm.location.country"
+               id="country"
+               name="country"
+               placeholder="Country">
+        <label for="country">Country</label>
+      </div>
+    </div>
+    <div class="form-floating mb-3 col-3" >
+      <input type="number" min=0 class="form-control"
+             [ngStyle]="{'border-color':venueForm && !venueForm.maxAllowedNumberOfVisitors ?'red':'green'}"
+             [(ngModel)]="venueForm.maxAllowedNumberOfVisitors"
+             tooltip="Required" [display]="venueForm && !venueForm.maxAllowedNumberOfVisitors"
+             id="maxAllowedNumberOfVisitors"
+             name="maxAllowedNumberOfVisitors"
+             placeholder="Max no. of visitors">
+      <label for="maxAllowedNumberOfVisitors">Max no. of visitors</label>
+    </div>
+    <div class="form-control mb-3 p-0" >
+      <label for="locationType">Type</label>
+      <ng-select (change)="readSelectedType($event)"
+              id="locationType"
+              [ngStyle]="{'border-color':venueForm && !venueForm.locationType ?'red':'green'}"
+              aria-label="Floating label select example"
+              name="locationType">
+        <ng-option  *ngFor="let t of locationTypes" [value]="t" >{{t | lowercase}}</ng-option>
+      </ng-select>
+    </div>
+    <div class="d-flex justify-content-end mb-5">
+      <button type="submit" (click)="createVenue(venueForm)" class="btn btn-success">Create</button>
+    </div>
+  </form>
+</div>

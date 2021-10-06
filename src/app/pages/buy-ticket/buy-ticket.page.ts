@@ -12,6 +12,7 @@ export class BuyTicketPage implements OnInit{
   strikeCheckout:any = null;
 
   public isOrderCreated: boolean = false;
+  public buyerEmail:string;
 
   constructor(private _service: PaymentService) { }
 
@@ -20,7 +21,12 @@ export class BuyTicketPage implements OnInit{
     this.stripePaymentGateway();
   }
 
+  setBuyer(val){
+    this.buyerEmail = val;
+  }
+
   checkout(amount, currency, totalTickets, totalEvents, quantity) {
+    let setBuyer = this;
     const serv = this._service;
     const result = new Subject<boolean>();
     const strikeCheckout = (<any>window).StripeCheckout.configure({
@@ -29,17 +35,17 @@ export class BuyTicketPage implements OnInit{
       currency: currency=='MKD'? 'mkd' : 'eur',
       token: function (stripeToken: any) {
         console.log(stripeToken)
+        setBuyer.setBuyer(stripeToken.email);
         alert('Stripe token generated!');
         serv.pay(amount, stripeToken.id, currency).subscribe();
         result.next(true);
       }
     });
-
     this.isOrderCreated=true;
 
     strikeCheckout.open({
-      name: 'RemoteStack',
-      description: 'Payment widgets',
+      name: 'Visit Music',
+      description: 'Tickets purchasing',
       amount: amount * 100
     });
 

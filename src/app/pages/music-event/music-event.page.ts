@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {MusicEventService} from "../../services/music-event.service";
 import {MusicEvent} from "../../interfaces/music-event.interface";
 import {tap} from "rxjs/operators";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   templateUrl: 'music-event.page.html',
@@ -11,9 +12,12 @@ import {tap} from "rxjs/operators";
 export class MusicEventPage implements OnInit {
 
   musicEvent: MusicEvent | undefined;
+  inCart = false;
+  isLoggedIn = false;
 
   constructor(private route: ActivatedRoute,
-              private musicEventService: MusicEventService) {
+              private musicEventService: MusicEventService,
+              private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -22,6 +26,19 @@ export class MusicEventPage implements OnInit {
        .pipe(
          tap(event => this.musicEvent = event)
        ).subscribe(_ => console.log(), error => console.log(error))
+    this.isLoggedIn = this.authService.isLoggedIn();
+  }
+
+  addToCart(musicEvent){
+    console.log(musicEvent);
+    this.inCart = true;
+  }
+
+  deleteEvent(id){
+  /*  this.musicEventService.deleteMusicEvent(id)
+      .pipe(tap(success=>console.log(success)))
+      .subscribe();
+    this.musicEventService.getAll().pipe(tap(data=>this.musicEvents=data)).subscribe();*/
   }
 
 }

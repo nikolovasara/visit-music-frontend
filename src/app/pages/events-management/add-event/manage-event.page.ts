@@ -7,6 +7,7 @@ import {MusicEventForm} from "../../../models/forms/music-event-form.interface";
 import {AlertService} from "../../../notifications/alert";
 import {ActivatedRoute} from "@angular/router";
 import {MusicEvent} from "../../../interfaces/music-event.interface";
+import {NotifierService} from "angular-notifier";
 
 @Component({
   templateUrl: './manage-event.page.html',
@@ -23,7 +24,7 @@ export class ManageEventPage implements OnInit {
   musicEventForm: MusicEventForm = new MusicEventForm();
 
   constructor(private musicEventService: MusicEventService,
-              protected alertService: AlertService,
+              private notifierService: NotifierService,
               private route: ActivatedRoute) {
   }
 
@@ -76,9 +77,10 @@ export class ManageEventPage implements OnInit {
     this.musicEventService.createMusicEvent(this.musicEventForm)
       .pipe(tap(data=>{
         console.log(data)
-        this.alertService.success("Music Event successfully created")
+        this.notifierService.notify('success','Music event successfully created.')
+        this.musicEventForm = new MusicEventForm();
       }, err => {
-        this.alertService.error("An Error occurred. Please fill in the data in the right format.")
+        this.notifierService.notify("error", "An Error occurred. Please fill in the data in the right format.")
       }))
       .subscribe();
   }
@@ -89,9 +91,9 @@ export class ManageEventPage implements OnInit {
     this.musicEventService.updateMusicEvent(musicEventId,this.musicEventForm)
       .pipe(tap(data=>{
         console.log(data)
-        this.alertService.success("Music Event successfully updated")
+        this.notifierService.notify("success","Music Event successfully updated")
       }, err => {
-        this.alertService.error("An Error occurred. Please fill in the data in the right format.")
+        this.notifierService.notify('error',"An Error occurred. Please fill in the data in the right format.")
       }))
       .subscribe();
   }
