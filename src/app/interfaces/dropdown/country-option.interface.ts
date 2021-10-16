@@ -1,0 +1,8 @@
+export class CountryOption{
+  name: string;
+  code: string;
+  constructor(name) {
+    this.name = name;
+    this.code = name;
+  }
+}

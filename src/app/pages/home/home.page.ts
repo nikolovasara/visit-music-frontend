@@ -6,15 +6,20 @@ import {Router} from "@angular/router";
 import {OrderManagementService} from "../../services/order-management.service";
 import {AuthService} from "../../services/auth.service";
 import {NotifierService} from "angular-notifier";
+import {EventFilter} from "../../models/forms/event-filter.interface";
+import {Money} from "../../interfaces/ticket-price.interface";
+import {CustomDatePipe} from "../../pipes/custom-date.pipe";
+import {formatDate} from "@angular/common";
+import {DateUtils} from "../../utils/dates/date-utils.component";
 
 @Component({
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.css']
 })
 export class HomePage implements OnInit{
-
   isLoggedIn = false;
   musicEvents: MusicEvent[] = [];
+  musicEventsFromDb:MusicEvent[] = [];
   pageOfItems: Array<any>;
   clicked:Map<string,boolean>=new Map<string, boolean>();
 
@@ -50,11 +55,102 @@ export class HomePage implements OnInit{
             this.musicEvents=filtered;
           }
           this.musicEvents.sort((a,b)=>(a.eventTime>b.eventTime?1:-1))
+          this.musicEventsFromDb = this.musicEvents;
           console.log(this.musicEvents)
         })
       ).subscribe()
     this.disableAddButtonsForEventsInCart()
 
+  }
+
+  filterByCountry(country){
+    this.musicEvents = this.musicEvents.filter(e=>e.venue.location.country == country);
+  }
+
+  filterByGenre(genre){
+    this.musicEvents = this.musicEvents.filter(e=>e.musicPerformerList[0].genre == genre.toString());
+  }
+
+  filterByDate(dateMin, dateMax, condition){
+    const t=this.resetHours(this.musicEvents[0].eventTime);
+    console.log("CONSTR ", t)
+    console.log(new Date(dateMin))
+    switch(condition){
+      case 'gt':{
+        this.musicEvents = this.musicEvents.filter(e=>DateUtils.checkIfAfter(e.eventTime, dateMin));
+        break;
+      }
+      case 'lt':{
+        this.musicEvents = this.musicEvents.filter(e=>DateUtils.checkIfBefore(e.eventTime, dateMin));
+        break;
+      }
+      case 'eq':{
+        this.musicEvents = this.musicEvents.filter(e=>new Date(e.eventTime).getDay()==new Date(dateMin).getDay()
+        && new Date(e.eventTime).getMonth()==new Date(dateMin).getMonth()
+        && new Date(e.eventTime).getFullYear()==new Date(dateMin).getFullYear());
+        break;
+      }
+      case 'neq':{
+        this.musicEvents = this.musicEvents.filter(e=>new Date(e.eventTime).getDay()!=new Date(dateMin).getDay());
+        break;
+      }
+      case 'range':{
+        this.musicEvents = this.musicEvents.filter(e=>DateUtils.checkIfBefore(e.eventTime,dateMin) == false && DateUtils.checkIfAfter(e.eventTime, dateMax) == false);
+        break;
+      }
+    }
+  }
+
+  resetHours(date: Date){
+    const d= new Date(date);
+    d.setHours(0,0,0)
+    return d;
+  }
+
+  filterByKeyword(kw:string){
+    this.musicEventService.findEvent(kw).pipe(tap(data=>{
+      this.musicEvents=data
+    }))
+      .subscribe();
+  }
+
+  filterByPrice(priceMin:number, priceMax:number){
+    this.musicEvents = this.musicEvents.filter(e=>this.convertToEuro(e.ticketPrice) >= priceMin && this.convertToEuro(e.ticketPrice) <= priceMax);
+  }
+
+  convertToEuro(ticketPrice: Money){
+    if(ticketPrice.currency=="EUR"){
+       return ticketPrice.amount;
+    }
+     return ticketPrice.amount/61.5;
+  }
+
+  filter(filters: EventFilter){
+    this.musicEvents = this.musicEventsFromDb;
+    if(filters.country != undefined){
+      this.filterByCountry(filters.country);
+    }
+    if(filters.genre != undefined){
+      this.filterByGenre(filters.genre);
+    }
+    if(filters.price != undefined){
+      this.filterByPrice(filters.price[0], filters.price[1]);
+    }
+
+    if(filters.date != undefined){
+      if(filters.date instanceof Date){
+        console.log("SINGLE")
+        this.filterByDate(filters.date,filters.date, filters.dateCondition);
+      }
+      else{
+        console.log("RANGE")
+        this.filterByDate(filters.date[0],filters.date[1], filters.dateCondition);
+      }
+    }
+
+    if(filters.keyword != undefined){
+      this.filterByKeyword(filters.keyword);
+    }
   }
 
   disableAddButtonsForEventsInCart(){

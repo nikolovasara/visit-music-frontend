@@ -21,6 +21,7 @@ export class ManageEventPage implements OnInit {
   venues: Venue[];
   selectedVenueId: string;
   ready: number;
+  todayDate = new Date();
   musicEventForm: MusicEventForm = new MusicEventForm();
 
   constructor(private musicEventService: MusicEventService,

@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {MusicEvent} from "../interfaces/music-event.interface";
 import {StorageService} from "./storage.service";
-import {MusicPerformer} from "../interfaces/music-performer.interface";
+import {Genre, MusicPerformer} from "../interfaces/music-performer.interface";
 import {Venue} from "../interfaces/venue.interface";
 import {MusicEventForm} from "../models/forms/music-event-form.interface";
 import {Id} from "../interfaces/id.interface";
@@ -70,6 +70,14 @@ export class MusicEventService{
 
   createPerformer(formData: PerformerForm){
     return this._http.post(`http://localhost:9090/api/music-performers`, formData)
+  }
+
+  getAllCountries(){
+    return this._http.get<string[]>('http://localhost:9090/api/venues/countries',  {headers: this.headers})
+  }
+
+  getAllGenres(){
+    return this._http.get<Genre[]>('http://localhost:9090/api/music-performers/genres',  {headers: this.headers})
   }
 
 }

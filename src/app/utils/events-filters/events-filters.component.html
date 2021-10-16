@@ -1,0 +1,72 @@
+<div class="container mb-4">
+  <div class="row">
+    <div class="col">
+      <div class="input-group mb-3 search">
+        <input type="text" #kw class="form-control" id="f-search" placeholder="Search">
+        <button class="btn btn-outline-secondary" (click)="addKeyword(kw.value)" type="button" id="button-addon2">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+      <div class="input-group">
+        <div class="form-floating">
+          <select class="form-select" id="date"
+                  #dateCondition
+                  aria-label="Floating label select example"
+                  name="date" (change)="setDateCondition(dateCondition.value)">
+            <option value="gt">Greater than</option>
+            <option value="lt">Less than</option>
+            <option value="eq">Equals</option>
+            <option value="neq">Not equal</option>
+            <option value="range">In range</option>
+          </select>
+          <label for="date">Condition</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control"
+                 id="eventTime"
+                 name="eventTime"
+                 [selectMode]="filters.dateCondition == 'range'?'range':'single'"
+                 placeholder="Date & Time"
+                 [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2">
+          <owl-date-time
+            (afterPickerClosed)="filters.dateCondition=='range'? addDate(dtPicker2.selecteds) : addDate(dtPicker2.selected)"
+            pickerType="calendar"
+            #dtPicker2></owl-date-time>
+          <label for="eventTime">Date & Time</label>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row">
+        <div class="form-floating w-100 mb-3 ms-4 col">
+          <p-dropdown [options]="genres" [(ngModel)]="selectedGenre" placeholder="Genre" optionLabel="name"
+                      [showClear]="true"
+                      (onChange)="addGenre(selectedGenre?.name)"
+                      [style]="{'width':'100%'}"></p-dropdown>
+        </div>
+        <div class="form-floating mb-3 col ms-4">
+          <p-dropdown [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name" [filter]="true"
+                      filterBy="name"
+                      (onChange)="addCountry(selectedCountry?.name)"
+                      [showClear]="true" placeholder="Select a Country">
+            <ng-template pTemplate="selectedItem">
+              <div class="country-item country-item-value" *ngIf="selectedCountry">
+                <div>{{selectedCountry.name}}</div>
+              </div>
+            </ng-template>
+            <ng-template let-country pTemplate="item">
+              <div class="country-item">
+                <div>{{country.name}}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+      </div>
+      <div class="row">
+        <ngx-slider #priceSlider [(value)]="minValue" (valueChange)="priceChanged(priceSlider)"  [(highValue)]="maxValue" [options]="options"></ngx-slider>
+      </div>
+
+    </div>
+  </div>
+  <div class="text-center btn-outline-secondary" (click)="resetFilters()">Reset filters</div>
+</div>

@@ -19,8 +19,9 @@
               tooltip="Required" [display]="musicEventForm && !musicEventForm.musicEventName"
               name="eventTime"
               placeholder="Date & Time"
+              [min]="todayDate"
         [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2">
-      <owl-date-time #dtPicker2></owl-date-time>
+      <owl-date-time  #dtPicker2></owl-date-time>
       <label for="eventTime">Date & Time</label>
     </div>
     <div class="input-group row m-0">

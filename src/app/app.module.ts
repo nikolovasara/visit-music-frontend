@@ -20,7 +20,7 @@ import {LoginPage} from "./pages/login/login.page";
 import {AuthService} from "./services/auth.service";
 import {StorageService} from "./services/storage.service";
 import {ManageEventPage} from "./pages/events-management/add-event/manage-event.page";
-import {OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
+import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgxMaskModule} from "ngx-mask";
 import {NgSelectModule} from "@ng-select/ng-select";
@@ -32,6 +32,10 @@ import {DashboardPage} from "./pages/dashboard/dashboard.page";
 import {SalesReportPage} from "./pages/sales-report/sales-report.page";
 import {AddVenuePage} from "./pages/events-management/add-venue/add-venue.page";
 import {AddPerformerPage} from "./pages/events-management/add-performer/add-performer.page";
+import {AgGridModule} from "ag-grid-angular";
+import {EventsFiltersComponent} from "./utils/events-filters/events-filters.component";
+import {DropdownModule} from "primeng/dropdown";
+import {NgxSliderModule} from "@angular-slider/ngx-slider";
 
 const pages = [
   HomePage,
@@ -55,7 +59,7 @@ const pipes = [
 ]
 
 const components = [
-  AppComponent
+  AppComponent,
 ];
 
 const modules = [
@@ -71,7 +75,10 @@ const modules = [
   OwlNativeDateTimeModule,
   NgxMaskModule.forRoot(),
   NgSelectModule,
+  DropdownModule,
+  NgxSliderModule,
   TooltipModule,
+  AgGridModule.withComponents([]),
   NotifierModule.withConfig({position: {
 
       horizontal: {
@@ -87,6 +94,15 @@ const modules = [
   })
 ];
 
+export const MY_NATIVE_FORMATS = {
+  fullPickerInput: {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'},
+  datePickerInput: {year: 'numeric', month: 'numeric', day: 'numeric'},
+  timePickerInput: {hour: 'numeric', minute: 'numeric'},
+  monthYearLabel: {year: 'numeric', month: 'short'},
+  dateA11yLabel: {year: 'numeric', month: 'long', day: 'numeric'},
+  monthYearA11yLabel: {year: 'numeric', month: 'long'},
+};
+
 const providers = [
   MusicEventService,
   OrderManagementService,
@@ -96,9 +112,9 @@ const providers = [
 ];
 
 @NgModule({
-  declarations: [...pages, ...components, ...pipes],
+  declarations: [...pages, ...components, ...pipes, EventsFiltersComponent],
     imports: [...modules],
-  providers: [...providers, CurrencyConverterPipe],
+  providers: [...providers, CurrencyConverterPipe, {provide:OWL_DATE_TIME_FORMATS, useValue: MY_NATIVE_FORMATS}],
   bootstrap: [...components]
 })
 export class AppModule {
