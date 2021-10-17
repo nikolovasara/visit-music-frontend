@@ -36,15 +36,19 @@ import {AgGridModule} from "ag-grid-angular";
 import {EventsFiltersComponent} from "./utils/events-filters/events-filters.component";
 import {DropdownModule} from "primeng/dropdown";
 import {NgxSliderModule} from "@angular-slider/ngx-slider";
+import {RegisterPage} from "./pages/register/register.page";
+import {FooterPage} from "./pages/layout/footer/footer.page";
 
 const pages = [
   HomePage,
   HeaderPage,
+  FooterPage,
   MusicEventPage,
   BuyTicketPage,
   ShoppingCartPage,
   CheckoutPage,
   LoginPage,
+  RegisterPage,
   ManageEventPage,
   AddVenuePage,
   AddPerformerPage,
@@ -87,7 +91,7 @@ const modules = [
       },
       vertical: {
         position: 'top',
-        distance: 12,
+        distance: 80,
         gap: 10
       }
     }

@@ -1,0 +1,27 @@
+<notifier-container></notifier-container>
+<div class="container card">
+  <form class="register-page" [formGroup]="registerForm" (ngSubmit)="register()">
+    <div class="form-floating mb-3" >
+      <input type="text" class="form-control" formControlName="username" id="username" placeholder="username">
+      <label for="username">Username</label>
+    </div>
+    <div class="form-floating mb-3" >
+      <input type="password" class="form-control" formControlName="password" id="password" placeholder="password">
+      <label for="password">Password</label>
+    </div>
+    <div class="form-floating mb-3" >
+      <input type="password" class="form-control" formControlName="confirmPassword" id="confirmPassword" placeholder="password">
+      <label for="confirmPassword">Repeat Password</label>
+    </div>
+    <div class="form-floating mb-3" >
+      <input type="text" class="form-control" formControlName="role" id="role">
+      <label for="role">Role</label>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-success">Create</button>
+    </div>
+  </form>
+  <footer class="mt-auto d-flex justify-content-end">
+    <img src="assets/img/logo1text.png" id="logo-text">
+  </footer>
+</div>

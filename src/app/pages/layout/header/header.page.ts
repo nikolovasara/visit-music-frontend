@@ -5,6 +5,7 @@ import {StorageService} from "../../../services/storage.service";
 import {User} from "../../../interfaces/user.interface";
 import {AlertService} from "../../../notifications/alert";
 import {ActivatedRoute, Router} from "@angular/router";
+import {NotifierService} from "angular-notifier";
 
 @Component({
   selector: 'header',
@@ -19,7 +20,8 @@ export class HeaderPage implements OnInit{
   constructor(private orderManagementService:OrderManagementService,
               private authService:AuthService,
               private storageService:StorageService,
-              private router: Router) {
+              private router: Router,
+              private notifierService: NotifierService) {
     this.itemsInCart=0;
     this.isLoggedIn = this.authService.isLoggedIn();
     if(this.isLoggedIn){
@@ -36,6 +38,7 @@ export class HeaderPage implements OnInit{
 
   logout(){
     this.authService.logout();
+    this.notifierService.notify('info',"Logged out");
   }
 
   search(key){

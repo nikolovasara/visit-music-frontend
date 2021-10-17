@@ -11,6 +11,7 @@ import {DashboardPage} from "./pages/dashboard/dashboard.page";
 import {SalesReportPage} from "./pages/sales-report/sales-report.page";
 import {AddVenuePage} from "./pages/events-management/add-venue/add-venue.page";
 import {AddPerformerPage} from "./pages/events-management/add-performer/add-performer.page";
+import {RegisterPage} from "./pages/register/register.page";
 
 const routes: Routes = [
   {
@@ -40,6 +41,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginPage
+  },
+  {
+    path: 'add-user',
+    component: RegisterPage
   },
   {
     path: 'manage-event/:id',

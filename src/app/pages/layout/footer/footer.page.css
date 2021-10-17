@@ -1,0 +1,14 @@
+a{
+  text-decoration: none;
+  color: white;
+}
+
+a:hover{
+  color: #de86a8;
+}
+
+footer{
+  height:300px;
+  background-color: rgba(47, 44, 47, 0.71);
+  padding-top:80px;
+}
