@@ -9,6 +9,6 @@ export class CustomDatePipe extends
   DatePipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    return super.transform(value, "EEEE, d MMM");
+    return super.transform(value, "EEEE, d MMM yyyy");
   }
 }
